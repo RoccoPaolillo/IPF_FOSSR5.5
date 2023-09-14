@@ -1,35 +1,101 @@
-extensions [matrix]
-
+globals[
+  MALEunder50init FEMunder50init MALE50to80init FEM50to80init MALEover80init FEMover80init ; initial random values of sample
+  MALEunder50 FEMunder50 MALE50to80 FEM50to80 MALEover80 FEMover80              ; fitted values of sample. Repeated just to keep record of initial values
+  w_MALEunder50 w_FEMunder50 w_MALE50to80 w_FEM50to80 w_MALEover80 w_FEMover80  ; weights for each category
+  under50  ; marginals age < 50
+  from50to80 ; marginals age 50 to 80
+  over80  ; marginals age over 80
+  male ; marginals male
+  female  ; marginals females
+  TAE ; Total Absolute Error
+]
 
 to sample_extraction
   clear-all
-set MALEunder50 random 100
-set FEMunder50 random 100
-set MALE50to80 random 100
-set FEM50to80 random 100
-set MALEover80 random 100
-set FEMover80 random 100
+  reset-ticks
+  ifelse seed_comparison? [random-seed 52682][]
+set MALEunder50init random 1000 ; initial values sample
+set FEMunder50init random 1000
+set MALE50to80init random 1000
+set FEM50to80init random 1000
+set MALEover80init random 1000
+set FEMover80init random 1000
+
+  set MALEunder50 MALEunder50init  ; Repeated just to keep record of initial values
+set FEMunder50 FEMunder50init
+set MALE50to80 MALE50to80init
+set FEM50to80 FEM50to80init
+set MALEover80 MALEover80init
+set FEMover80  FEMover80init
+
 sumFITmarginals
 end
 
+to update_weights
+  while [TAE != 0] [
+repeat 1 [
+fitting_rows           ; the algorithm of IPF: until TAE is 0, the weights are calibrated for each iteration. Each iteration includes update by row and update by column
+ fitting_columns
+ output-print  word "under50: " under50 output-print word "from50to80: " from50to80 output-print word "over80: " over80 ; to report the values in each iteration (after columns also updated)
+  output-print word "male: " male output-print word "female: " female output-print "iteration completed----\\"
+  ]]
+  update-plots
+end
 
-to sumFITmarginals
-set FITunder50 (MALEunder50 + FEMunder50)
-set FIT50to80 (MALE50to80 + FEM50to80)
-set FITover80 (MALEover80 + FEMover80)
-set FITmale (MALEunder50 + MALE50to80 + MALEover80)
-set FITfemale (FEMunder50 + FEM50to80 + FEMover80)
+
+
+to fitting_rows
+
+  set MALEunder50 (MALEunder50 * (TGTunder50 / under50))   ; fitting for columns: the value in the cell is multiplied by weights at that iteration
+  set FEMunder50 (FEMunder50 * (TGTunder50 / under50))     ; weight = target marginal / fitted marginal
+  set MALE50to80 (MALE50to80 * (TGT50to80 / from50to80))
+  set FEM50to80 (FEM50to80 * (TGT50to80 / from50to80))
+  set MALEover80 (MALEover80 * (TGTover80 / over80))
+  set FEMover80 (FEMover80 * (TGTover80 / over80))
+
+ sumFITmarginals     ; marginals are updated (at each step: rows will fit target, columns not)
+ update-plots
+end
+
+to fitting_columns
+
+  set MALEunder50 (MALEunder50 * (TGTmale / male))        ; fitting for columns (as above)
+  set FEMunder50 (FEMunder50 * (TGTfemale / female))
+  set MALE50to80 (MALE50to80 * (TGTmale / male))
+  set FEM50to80 (FEM50to80 * (TGTfemale / female))
+  set MALEover80 (MALEover80 * (TGTmale / male))
+  set FEMover80 (FEMover80 * (TGTfemale / female))
+
+ sumFITmarginals   ; marginals are updated (at each step: columns will fit target, columns not)
+  update-plots
 
 end
+
+to sumFITmarginals
+set under50  precision  (MALEunder50 + FEMunder50) 5
+  set from50to80 precision (MALE50to80 + FEM50to80) 5
+  set over80 precision ( MALEover80 +  FEMover80) 5
+  set male precision (MALEunder50 + MALE50to80 +  MALEover80) 5
+  set female precision (FEMunder50 + FEM50to80 + FEMover80) 5
+  set TAE abs((TGTunder50 - under50) + (TGT50to80 - from50to80) + (TGTover80 - over80) + (TGTmale - male) + (TGTfemale - female))
+
+set w_MALEunder50 (MALEunder50 / MALEunder50init) ; update weights
+set w_FEMunder50 (FEMunder50 / FEMunder50init)
+set w_MALE50to80 (MALE50to80 / MALE50to80init)
+set w_FEM50to80 (FEM50to80 / FEM50to80init)
+set w_MALEover80 (MALEover80 / MALEover80init)
+set w_FEMover80 (FEMover80 / FEMover80init)
+
+  end
 @#$#@#$#@
 GRAPHICS-WINDOW
-1331
-99
-1372
-141
+1290
+447
+1375
+533
 -1
 -1
-1.0
+2.333333333333334
 1
 10
 1
@@ -43,19 +109,19 @@ GRAPHICS-WINDOW
 16
 -16
 16
-0
-0
+1
+1
 1
 ticks
 30.0
 
 BUTTON
-76
-26
-203
-59
+57
+41
+184
+74
 sample_extraction
-sample_extraction
+sample_extraction\nsetup-plots
 NIL
 1
 T
@@ -67,153 +133,87 @@ NIL
 1
 
 INPUTBOX
-300
-92
-377
-152
+749
+116
+826
+176
 TGTunder50
-100.0
+620.0
 1
 0
 Number
 
 INPUTBOX
-300
-160
-376
-220
+750
+184
+826
+244
 TGT50to80
-200.0
+300.0
 1
 0
 Number
 
 INPUTBOX
-30
-356
-114
-416
+434
+390
+518
+450
 TGTmale
-60.0
+500.0
 1
 0
 Number
 
 INPUTBOX
-120
-355
-210
-415
+521
+389
+611
+449
 TGTfemale
-55.0
+435.0
 1
 0
 Number
 
 INPUTBOX
-297
-225
-376
-285
+747
+249
+826
+309
 TGTover80
-50.0
+15.0
 1
 0
 Number
 
 TEXTBOX
-385
-173
-413
-191
+838
+200
+865
+218
 AGE
-10
+13
 0.0
 1
 
 TEXTBOX
-87
-453
-129
-471
+509
+463
+571
+481
 GENDER
-10
+13
 0.0
 1
-
-INPUTBOX
-122
-89
-210
-149
-FEMunder50
-54.0
-1
-0
-Number
-
-INPUTBOX
-27
-90
-117
-150
-MALEunder50
-82.0
-1
-0
-Number
-
-INPUTBOX
-28
-159
-119
-219
-MALE50to80
-89.0
-1
-0
-Number
-
-INPUTBOX
-124
-157
-211
-217
-FEM50to80
-92.0
-1
-0
-Number
-
-INPUTBOX
-28
-224
-117
-284
-MALEover80
-84.0
-1
-0
-Number
-
-INPUTBOX
-121
-222
-210
-282
-FEMover80
-60.0
-1
-0
-Number
 
 BUTTON
-635
-139
-749
-172
-update_weights
-set FITunder50 (MALEunder50 + FEMunder50)\nset FIT50to80 (MALE50to80 + FEM50to80)\nset FITover80 (MALEover80 + FEMover80)\nset FITmale (MALEunder50 + MALE50to80 + MALEover80)\nset FITfemale (FEMunder50 + FEM50to80 + FEMover80)\n
+31
+519
+145
+552
+fitting_rows
+fitting_rows\n
 NIL
 1
 T
@@ -224,100 +224,701 @@ NIL
 NIL
 1
 
-INPUTBOX
-213
-89
-294
-149
-FITunder50
-136.0
+MONITOR
+429
+122
+520
+167
+MALEunder50
+MALEunder50
+5
 1
-0
-Number
-
-INPUTBOX
-215
-160
-297
-220
-FIT50to80
-181.0
-1
-0
-Number
-
-INPUTBOX
-216
-223
-295
-283
-FITover80
-144.0
-1
-0
-Number
-
-INPUTBOX
-28
-289
-115
-349
-FITmale
-255.0
-1
-0
-Number
-
-INPUTBOX
-119
-290
-210
-350
-FITfemale
-206.0
-1
-0
-Number
+11
 
 MONITOR
+633
+135
+727
+180
+FITTEDunder50
+under50
+5
+1
+11
+
+MONITOR
+524
+122
+609
+167
+FEMunder50
+FEMunder50
+5
+1
+11
+
+MONITOR
+430
+172
+515
+217
+MALE50to80
+MALE50to80
+5
+1
+11
+
+MONITOR
+521
+172
+611
+217
+FEM50to80
+FEM50to80
+5
+1
+11
+
+MONITOR
+631
+188
+727
+233
+FITTED50to80
+from50to80
+5
+1
+11
+
+MONITOR
+429
+226
+514
+271
+MALEover80
+MALEover80
+5
+1
+11
+
+MONITOR
+519
+226
+608
+271
+FEMover80
+FEMover80
+5
+1
+11
+
+MONITOR
+630
+239
+725
+284
+FITTEDover80
+over80
+5
+1
+11
+
+MONITOR
+431
+313
+514
+358
+FITTEDmale
+male
+5
+1
+11
+
+MONITOR
+521
+312
+611
+357
+FITTEDfemale
+female
+5
+1
+11
+
+BUTTON
+193
+517
+304
 550
-97
-607
-142
-TEST
-2
+fitting_columns
+fitting_columns\n  
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+MONITOR
+743
+458
+821
+503
+TAE
+TAE
+5
+1
+11
+
+BUTTON
+539
+535
+653
+568
+update_weights
+update_weights
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+MONITOR
+759
+313
+816
+358
+sumcol
+TGTunder50 + TGT50to80 + TGTover80
 17
 1
 11
 
+MONITOR
+619
+397
+677
+442
+sumrow
+TGTmale + TGTfemale
+17
+1
+11
+
+MONITOR
+34
+123
+119
+168
+MALEunder50
+MALEunder50init
+5
+1
+11
+
+MONITOR
+126
+124
+211
+169
+FEMunder50
+FEMunder50init
+5
+1
+11
+
+MONITOR
+36
+173
+120
+218
+MALE50to80
+MALE50to80init
+5
+1
+11
+
+MONITOR
+127
+172
+212
+217
+FEM50to80
+FEM50to80init
+5
+1
+11
+
+MONITOR
+35
+220
+120
+265
+MALEover80
+MALEover80init
+5
+1
+11
+
+MONITOR
+127
+220
+213
+265
+FEMover80
+FEMover80init
+5
+1
+11
+
+MONITOR
+36
+319
+128
+364
+MALEunder50
+w_MALEunder50
+5
+1
+11
+
+MONITOR
+130
+319
+223
+364
+FEMunder50
+w_FEMunder50
+5
+1
+11
+
+MONITOR
+35
+368
+128
+413
+MALE50to80
+w_MALE50to80
+5
+1
+11
+
+MONITOR
+133
+368
+223
+413
+FEM50to80
+w_FEM50to80
+5
+1
+11
+
+MONITOR
+32
+414
+128
+459
+MALEover80
+w_MALEover80
+5
+1
+11
+
+MONITOR
+132
+415
+223
+460
+FEMover80
+w_FEMover80
+5
+1
+11
+
+SWITCH
+103
+571
+249
+604
+seed_comparison?
+seed_comparison?
+0
+1
+-1000
+
+PLOT
+1165
+58
+1325
+178
+MALEunder50
+NIL
+NIL
+0.0
+10.0
+0.0
+1.0
+true
+false
+"" ""
+PENS
+"default" 1.0 1 -16777216 true "plot MALEunder50" "plot MALEunder50"
+
+PLOT
+1327
+57
+1487
+177
+FEMunder50
+NIL
+NIL
+0.0
+10.0
+0.0
+1.0
+true
+false
+"" ""
+PENS
+"default" 1.0 1 -16777216 true "plot FEMunder50" "plot FEMunder50"
+
+PLOT
+1165
+181
+1325
+301
+MALE50to80
+NIL
+NIL
+0.0
+10.0
+0.0
+1.0
+true
+false
+"" ""
+PENS
+"default" 1.0 1 -16777216 true "plot MALE50to80" "plot MALE50to80"
+
+PLOT
+1329
+182
+1489
+302
+FEM50to80
+NIL
+NIL
+0.0
+10.0
+0.0
+10.0
+true
+false
+"" ""
+PENS
+"default" 1.0 1 -16777216 true "plot FEM50to80" "plot FEM50to80"
+
+PLOT
+1165
+302
+1325
+422
+MALEover80
+NIL
+NIL
+0.0
+10.0
+0.0
+1.0
+true
+false
+"" ""
+PENS
+"default" 1.0 1 -16777216 true "plot MALEover80" "plot MALEover80"
+
+PLOT
+1330
+304
+1490
+424
+FEMover80
+NIL
+NIL
+0.0
+10.0
+0.0
+10.0
+true
+false
+"" ""
+PENS
+"default" 1.0 1 -16777216 true "plot FEMover80" "plot FEMover80"
+
+TEXTBOX
+61
+296
+211
+314
+Weights to each category
+12
+0.0
+1
+
+TEXTBOX
+73
+100
+174
+118
+Original sample
+12
+0.0
+1
+
+TEXTBOX
+436
+538
+531
+567
+COMPILE IPF\nuntil convergence
+12
+0.0
+1
+
+TEXTBOX
+93
+485
+243
+511
+alternative to update weights: check each iteration
+10
+0.0
+1
+
+TEXTBOX
+158
+527
+187
+559
+-->
+12
+0.0
+1
+
+TEXTBOX
+114
+551
+208
+569
+↑____________|
+12
+0.0
+1
+
+TEXTBOX
+727
+435
+847
+457
+Total Absolute Error
+13
+0.0
+1
+
+TEXTBOX
+735
+10
+862
+58
+Include values for the target population (sumcol == sumrow!)\n
+13
+0.0
+1
+
+TEXTBOX
+475
+96
+549
+114
+fitted values
+13
+0.0
+1
+
+TEXTBOX
+632
+112
+727
+130
+fitted marginals
+13
+0.0
+1
+
+TEXTBOX
+744
+79
+857
+109
+target marginals\n(known population)
+12
+0.0
+1
+
+TEXTBOX
+731
+75
+752
+367
+I\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI
+12
+0.0
+1
+
+TEXTBOX
+333
+360
+729
+378
+— — — — — — — — — — — — — — — — — — — — — — — — — — — —
+12
+0.0
+1
+
+TEXTBOX
+621
+81
+636
+299
+I\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI
+10
+0.0
+1
+
+TEXTBOX
+347
+293
+624
+315
+— — — — — — — — — — — — — — — — — — — — — — — — — — 
+9
+0.0
+1
+
+OUTPUT
+900
+29
+1140
+599
+10
+
+TEXTBOX
+958
+10
+1108
+28
+Update iterations
+12
+0.0
+1
+
+TEXTBOX
+268
+397
+396
+446
+Include values for the target population (sumcol == sumrow!)
+13
+0.0
+1
+
+TEXTBOX
+397
+404
+421
+433
+►
+24
+0.0
+1
+
+TEXTBOX
+29
+43
+53
+72
+►
+24
+0.0
+1
+
+TEXTBOX
+773
+57
+799
+86
+▼
+24
+0.0
+1
+
+TEXTBOX
+533
+497
+578
+526
+▼
+24
+0.0
+1
+
 @#$#@#$#@
 ## WHAT IS IT?
 
-(a general understanding of what the model is trying to show or explain)
+The model formalizes the Iterative Proportional Fitting (IPF), a technique used for synthetic reconstruction, used in the case of characteristics of artificial populations are unkwown from a sample, but known elsewhere (e.g. marginal distribution of census population). The goal of the technique is to find weights to each category of agents' attribution so that the artificial population is as much representative of the population.
+
+IPF in the same as raking in statistics, RAS algorithm etc.
 
 ## HOW IT WORKS
 
-(what rules the agents use to create the overall behavior of the model)
+IPF takes the data into a contingency table, the goal is that the  runs a series of iteration until the benchmark is met. An iteration is the calibration of weights for each cell of the contingency table (i.e. joint distribution) by row and by columns. The weight is the equivalent of the ratio of marginal distribution known in the population (target) by the fitted marginal distribution of the sample at each iteration.
+
+Each cell at iteration 0 (i.e. the original sample) has weight 1.
+
+TAE (Total Absolute Erro) is one validation measure of IPF. It is the absolute difference between target marginal value and fitted marginal value, which should be close to zero, i.e. the values are similar
 
 ## HOW TO USE IT
 
-(how to use the model, including a description of each of the items in the Interface tab)
+1) SAMPLE_EXTRACTION: set up a random sample
+2) Set manually the target values of each category, i.e. the marginal values known in the hypothetical population (blue boxes TGT). The sum of columns must be equal to the some of the rows!
+3) UPDATE_WEIGHTS: to run the IFP
+
+Alternatively, the algorithm can be broken down manually running at each step first by rows (FITTING_ROWS button) and then by columns (FITTING_COLUMNS button). The chooser SEED_COMPARISON is to set a seed in the code to have same values for comparison with UPDATE_WEIGHTS
 
 ## THINGS TO NOTICE
 
-(suggested things for the user to notice while running the model)
+In the contingency table, the updated value of each cell (joint distribution) is displayed (i.e. value of the cell weighted at each iteration).
+In the corner, the actual weight estimated at each step, so also the final ones. 
+In the plots, the value of each joint category is updated.
 
-## THINGS TO TRY
+## THINGS TO CORRECT /  NEXT STEPS
 
-(suggested things for the user to try to do (move sliders, switches, etc.) with the model)
+* Used precision values with 5 decimals to avoid integerization: not having precise correspondence between fitted marginals and known marginals, so that the iteration would continues for extremely low values of TAE
 
-## EXTENDING THE MODEL
+* Allocating: the values obtained have decimals, which might be nonsense in some cases with initialization. They can be rounded then.
 
-(suggested things to add or change in the Code tab to make the model more complicated, detailed, accurate, etc.)
-
-## NETLOGO FEATURES
-
-(interesting or unusual features of NetLogo that the model uses, particularly in the Code tab; or where workarounds were needed for missing features)
+* Limits of IPF: 
+- curse of dimensionality: only two dimensions at the time, we need to address this
+- nested data, e.g. households > agents (two-layered population)
+- test the initialization with data
 
 ## RELATED MODELS
 
