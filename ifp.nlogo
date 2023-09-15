@@ -883,50 +883,60 @@ TEXTBOX
 @#$#@#$#@
 ## WHAT IS IT?
 
-The model formalizes the Iterative Proportional Fitting (IPF), a technique used for synthetic reconstruction, used in the case of characteristics of artificial populations are unkwown from a sample, but known elsewhere (e.g. marginal distribution of census population). The goal of the technique is to find weights to each category of agents' attribution so that the artificial population is as much representative of the population.
+The model formalizes the Iterative Proportional Fitting (IPF), a technique used for synthetic reconstruction, used to derive the properties of agents from the known marginal distribution of a target population. 
 
-IPF in the same as raking in statistics, RAS algorithm etc.
+## LITERATURE CONTEXT
+
+Synthetic populations aim at integrating various database sources to build architectures as much realistic to a target population (Adiga et al., 2015). The challenge is to integrate multiple characteristics of the agents and reproduce the joint distributions of such characteristics in the target population of interest. Yameogo et al. identify 3 main categories of techniques that address the issue: 
+- COMBINATORIAL OPTIMIZATION (CO): used when the joint distributions are known and can be directly implemented, scaling the target population to the synthetic society
+- SYNTHETIC RECONSTRUCTION (SR): used when the joint distributions are not known, but the marginal distributions in the population are known. The goal of the technique is to estimate weights for each category of artificial agents' joint attributes from the marginal distribution of the population.
+- STATISTICAL LEARNING: new and less used: estimate the joint probabilities from regression models.
+
+In fact, CO and SR are the two main streams of techniques in literature, SR the choice when integrating surveys and want to assure they are representative of a known population. Much literature stems from geography studies, taking marginal distributions from census track as target population. 
+
+Our work is in SR cluster, since best fit to provide a service able to integrate various data sources where attributes of synthetic agents are not known.
+
+IFP is the archetypal technique in SR, equivalent to raking in statistics.
 
 ## HOW IT WORKS
 
-IPF takes the data into a contingency table, the goal is that the  runs a series of iteration until the benchmark is met. An iteration is the calibration of weights for each cell of the contingency table (i.e. joint distribution) by row and by columns. The weight is the equivalent of the ratio of marginal distribution known in the population (target) by the fitted marginal distribution of the sample at each iteration.
+IPF takes the data into a contingency table, the goal is that the  runs a series of iteration until a benchmark is met. An iteration is the calibration of weights for each cell of the contingency table (i.e. joint category of the two variables into account) both by row (constraint 1) and by columns (constraint 2). For each cell, the weight computed is the ratio of marginal distribution known in the population (target) by the fitted marginal distribution of the sample at each iteration.
 
 Each cell at iteration 0 (i.e. the original sample) has weight 1.
 
-TAE (Total Absolute Erro) is one validation measure of IPF. It is the absolute difference between target marginal value and fitted marginal value, which should be close to zero, i.e. the values are similar
+TAE (Total Absolute Erro) is one internal validation measure to IPF algorithm. It is the absolute difference between known target marginal value and fitted marginal value, which should be close to zero, i.e. the values are similar.
+
+For the sake of exposition, a scenario here is presented where 2 variables are taken into account (AGE and GENDER), which will feed the initialization of the synthetic population. A random sample is extracted and known marginal distribution of a hypothetical population can be imposed. The goal of the model is to compute the weights of each category using IPF.
 
 ## HOW TO USE IT
 
 1) SAMPLE_EXTRACTION: set up a random sample
 2) Set manually the target values of each category, i.e. the marginal values known in the hypothetical population (blue boxes TGT). The sum of columns must be equal to the some of the rows!
-3) UPDATE_WEIGHTS: to run the IFP
+3) UPDATE_WEIGHTS: to run the IPF
 
-Alternatively, the algorithm can be broken down manually running at each step first by rows (FITTING_ROWS button) and then by columns (FITTING_COLUMNS button). The chooser SEED_COMPARISON is to set a seed in the code to have same values for comparison with UPDATE_WEIGHTS
+Alternatively, the algorithm can be broken down manually running at each step first by rows (FITTING_ROWS button) and then by columns (FITTING_COLUMNS button). The chooser SEED_COMPARISON is to set a seed in the code to have same values for comparison between FITTING_ROWS+COLUMN_ROWS and UPDATE_WEIGHTS
 
 ## THINGS TO NOTICE
 
-In the contingency table, the updated value of each cell (joint distribution) is displayed (i.e. value of the cell weighted at each iteration).
-In the corner, the actual weight estimated at each step, so also the final ones. 
-In the plots, the value of each joint category is updated.
+In the contingency table, the updated value of each cell (joint distribution) is displayed, multiplying it by its weight.
+In the corner, the actual weights estimated at each step. 
+In the plots, the value of each joint category is updated: it compares what initial distributions would be implemented based solely on data from the sample and how they would change once weights are calibrated.
 
 ## THINGS TO CORRECT /  NEXT STEPS
 
-* Used precision values with 5 decimals to avoid integerization: not having precise correspondence between fitted marginals and known marginals, so that the iteration would continues for extremely low values of TAE
+* Used precision values with 5 decimals to avoid "integerization": not having precise correspondence between fitted marginals and known marginals, so that the iteration would continues for extremely low values of TAE
 
 * Allocating: the values obtained have decimals, which might be nonsense in some cases with initialization. They can be rounded then.
 
-* Limits of IPF: 
-- curse of dimensionality: only two dimensions at the time, we need to address this
-- nested data, e.g. households > agents (two-layered population)
-- test the initialization with data
+* Limits of IPF (next steps, what is new): 
+	- enable the simulation to be used for nested data: the IPF uses one layer of population, generally individuals. This is addressed as two-layered population issue, e.g. combining data on individuals (level 1) and households (level 2), not knowing the actual distribution. A general trend is to run IPF for the two layers independently, or compute probabilities for one layers knowing the characteristics of the other (see Gargiulo et al., 2010, modeling individuals from known distributions of households). More recently, the Hierarchical Iterative Proportional Fitting has been developed to treat jointly the two layers (Yamaeogo et al 2021, Müller & Axhausen (2011) for a first implementation)
+	- "curse of multidimensionality": IPF uses two variables at the time, which is not the case with multiple source of data and research infrastructure. The model should be able to reproduce as many joint characteristics as possible. An alternative might be to repeat IPF for each combination 2x2 of variables,  and then reiterate until weights fit each possible combination, but this is slow and  unpracticable. I want to see if others have addressed this. Farooq et al (2013) should have addressed it, taking Markov Chain Monte Carlo (MCMC) as alternative to IPF to address multiple dimensions at the time. I have to study this.
+	- initialize with real data, both to test and to address data incongruity and automated techniques (Chapuis et al. 2022): variables are at different scales (e.g. age continuous, gender binary), incompleteness (a level of variable in the sample or in the population is missing, so the marginal sum is equal to 0 and IPF cannot be run). An overview of techniques and how to implement automatically in the initialization of abm.
 
-## RELATED MODELS
-
-(models in the NetLogo Models Library and elsewhere which are of related interest)
 
 ## CREDITS AND REFERENCES
 
-(a reference to the model's URL on the web if it has one, as well as any other necessary credits, citations, and links)
+Rocco Paolillo
 @#$#@#$#@
 default
 true
