@@ -884,6 +884,7 @@ TEXTBOX
 ## WHAT IS IT?
 
 The model formalizes the Iterative Proportional Fitting (IPF), a technique used for synthetic reconstruction, used to derive the properties of agents from the known marginal distribution of a target population. 
+The model provides weights to adapt to an artificial population, so to be representative of the target population
 
 ## LITERATURE CONTEXT
 
