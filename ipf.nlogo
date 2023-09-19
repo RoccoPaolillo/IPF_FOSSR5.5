@@ -89,13 +89,13 @@ set w_FEMover80 (FEMover80 / FEMover80init)
   end
 @#$#@#$#@
 GRAPHICS-WINDOW
-1290
-447
-1375
-533
+1326
+549
+1391
+615
 -1
 -1
-2.333333333333334
+1.73
 1
 10
 1
@@ -551,34 +551,16 @@ SWITCH
 604
 seed_comparison?
 seed_comparison?
-0
+1
 1
 -1000
 
 PLOT
-1165
-58
-1325
-178
-MALEunder50
-NIL
-NIL
-0.0
-10.0
-0.0
-1.0
-true
-false
-"" ""
-PENS
-"default" 1.0 1 -16777216 true "plot MALEunder50" "plot MALEunder50"
-
-PLOT
+1167
+34
 1327
-57
-1487
-177
-FEMunder50
+154
+%MALEunder50
 NIL
 NIL
 0.0
@@ -589,50 +571,14 @@ true
 false
 "" ""
 PENS
-"default" 1.0 1 -16777216 true "plot FEMunder50" "plot FEMunder50"
-
-PLOT
-1165
-181
-1325
-301
-MALE50to80
-NIL
-NIL
-0.0
-10.0
-0.0
-1.0
-true
-false
-"" ""
-PENS
-"default" 1.0 1 -16777216 true "plot MALE50to80" "plot MALE50to80"
+"default" 1.0 1 -16777216 true "plot MALEunder50 / (TGTmale + TGTfemale)" "plot MALEunder50 / (TGTmale + TGTfemale)"
 
 PLOT
 1329
-182
+34
 1489
-302
-FEM50to80
-NIL
-NIL
-0.0
-10.0
-0.0
-10.0
-true
-false
-"" ""
-PENS
-"default" 1.0 1 -16777216 true "plot FEM50to80" "plot FEM50to80"
-
-PLOT
-1165
-302
-1325
-422
-MALEover80
+154
+%FEMunder50
 NIL
 NIL
 0.0
@@ -643,25 +589,79 @@ true
 false
 "" ""
 PENS
-"default" 1.0 1 -16777216 true "plot MALEover80" "plot MALEover80"
+"default" 1.0 1 -16777216 true "plot FEMunder50 / (TGTmale + TGTfemale)" "plot FEMunder50 / (TGTmale + TGTfemale)"
 
 PLOT
-1330
-304
-1490
-424
-FEMover80
+1168
+193
+1328
+313
+%MALE50to80
 NIL
 NIL
 0.0
 10.0
 0.0
-10.0
+1.0
 true
 false
 "" ""
 PENS
-"default" 1.0 1 -16777216 true "plot FEMover80" "plot FEMover80"
+"default" 1.0 1 -16777216 true "plot MALE50to80 / (TGTmale + TGTfemale)" "plot MALE50to80 / (TGTmale + TGTfemale)"
+
+PLOT
+1331
+194
+1491
+314
+%FEM50to80
+NIL
+NIL
+0.0
+10.0
+0.0
+1.0
+true
+false
+"" ""
+PENS
+"default" 1.0 1 -16777216 true "plot FEM50to80 / (TGTmale + TGTfemale)" "plot FEM50to80 / (TGTmale + TGTfemale)"
+
+PLOT
+1171
+363
+1331
+483
+%MALEover80
+NIL
+NIL
+0.0
+10.0
+0.0
+1.0
+true
+false
+"" ""
+PENS
+"default" 1.0 1 -16777216 true "plot MALEover80 / (TGTmale + TGTfemale)" "plot MALEover80 / (TGTmale + TGTfemale)"
+
+PLOT
+1336
+365
+1496
+485
+%FEMover80
+NIL
+NIL
+0.0
+10.0
+0.0
+1.0
+true
+false
+"" ""
+PENS
+"default" 1.0 1 -16777216 true "plot FEMover80 / (TGTmale + TGTfemale)" "plot FEMover80 / (TGTmale + TGTfemale)"
 
 TEXTBOX
 61
@@ -879,6 +879,72 @@ TEXTBOX
 24
 0.0
 1
+
+MONITOR
+1201
+17
+1305
+62
+%MALEunder50
+MALEunder50 / (TGTmale + TGTfemale)
+2
+1
+11
+
+MONITOR
+1365
+17
+1462
+62
+%FEMunder50
+FEMunder50 / (TGTmale + TGTfemale)
+2
+1
+11
+
+MONITOR
+1206
+179
+1304
+224
+%MALE50to80
+MALE50to80 / (TGTmale + TGTfemale)
+2
+1
+11
+
+MONITOR
+1372
+182
+1462
+227
+%FEM50to80
+FEM50to80 / (TGTmale + TGTfemale)
+2
+1
+11
+
+MONITOR
+1204
+347
+1301
+392
+%MALEover80
+MALEover80 / (TGTmale + TGTfemale)
+2
+1
+11
+
+MONITOR
+1372
+350
+1461
+395
+%FEMover80
+FEMover80 / (TGTmale + TGTfemale)
+2
+1
+11
 
 @#$#@#$#@
 ## WHAT IS IT?
