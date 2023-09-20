@@ -89,10 +89,10 @@ set w_FEMover80 (FEMover80 / FEMover80init)
   end
 @#$#@#$#@
 GRAPHICS-WINDOW
-1326
-549
-1391
-615
+731
+377
+796
+443
 -1
 -1
 1.73
@@ -133,75 +133,75 @@ NIL
 1
 
 INPUTBOX
-749
+710
 116
-826
+789
 176
 TGTunder50
-700.0
+20.0
 1
 0
 Number
 
 INPUTBOX
-750
+712
 184
-826
+788
 244
 TGT50to80
-300.0
+30.0
 1
 0
 Number
 
 INPUTBOX
-434
+396
 390
-518
+480
 450
 TGTmale
-505.0
+56.0
 1
 0
 Number
 
 INPUTBOX
-521
+483
 389
-611
+573
 449
 TGTfemale
-510.0
+44.0
 1
 0
 Number
 
 INPUTBOX
-747
+709
 249
-826
+788
 309
 TGTover80
-15.0
+50.0
 1
 0
 Number
 
 TEXTBOX
-838
-200
-865
-218
+800
+208
+827
+226
 AGE
 13
 0.0
 1
 
 TEXTBOX
-509
-463
-571
-481
+488
+470
+550
+488
 GENDER
 13
 0.0
@@ -225,10 +225,10 @@ NIL
 1
 
 MONITOR
-429
-122
-520
-167
+391
+123
+482
+168
 MALEunder50
 MALEunder50
 5
@@ -236,9 +236,9 @@ MALEunder50
 11
 
 MONITOR
-633
+595
 135
-727
+689
 180
 FITTEDunder50
 under50
@@ -247,9 +247,9 @@ under50
 11
 
 MONITOR
-524
+486
 122
-609
+571
 167
 FEMunder50
 FEMunder50
@@ -258,9 +258,9 @@ FEMunder50
 11
 
 MONITOR
-430
+392
 172
-515
+477
 217
 MALE50to80
 MALE50to80
@@ -269,9 +269,9 @@ MALE50to80
 11
 
 MONITOR
-521
+483
 172
-611
+573
 217
 FEM50to80
 FEM50to80
@@ -280,9 +280,9 @@ FEM50to80
 11
 
 MONITOR
-631
+593
 188
-727
+689
 233
 FITTED50to80
 from50to80
@@ -291,9 +291,9 @@ from50to80
 11
 
 MONITOR
-429
+391
 226
-514
+476
 271
 MALEover80
 MALEover80
@@ -302,9 +302,9 @@ MALEover80
 11
 
 MONITOR
-519
+481
 226
-608
+570
 271
 FEMover80
 FEMover80
@@ -313,9 +313,9 @@ FEMover80
 11
 
 MONITOR
-630
+592
 239
-725
+687
 284
 FITTEDover80
 over80
@@ -324,9 +324,9 @@ over80
 11
 
 MONITOR
-431
+393
 313
-514
+476
 358
 FITTEDmale
 male
@@ -335,9 +335,9 @@ male
 11
 
 MONITOR
-521
+483
 312
-611
+573
 357
 FITTEDfemale
 female
@@ -363,10 +363,10 @@ NIL
 1
 
 MONITOR
-743
-458
-821
-503
+708
+487
+786
+532
 TAE
 TAE
 5
@@ -374,9 +374,9 @@ TAE
 11
 
 BUTTON
-539
+500
 535
-653
+614
 568
 update_weights
 update_weights
@@ -391,9 +391,9 @@ NIL
 1
 
 MONITOR
-759
+721
 313
-816
+778
 358
 sumcol
 TGTunder50 + TGT50to80 + TGTover80
@@ -402,9 +402,9 @@ TGTunder50 + TGT50to80 + TGTover80
 11
 
 MONITOR
-619
+581
 397
-677
+639
 442
 sumrow
 TGTmale + TGTfemale
@@ -413,10 +413,10 @@ TGTmale + TGTfemale
 11
 
 MONITOR
-34
-123
-119
-168
+13
+125
+98
+170
 MALEunder50
 MALEunder50init
 5
@@ -424,10 +424,10 @@ MALEunder50init
 11
 
 MONITOR
+105
 126
-124
-211
-169
+190
+171
 FEMunder50
 FEMunder50init
 5
@@ -435,10 +435,10 @@ FEMunder50init
 11
 
 MONITOR
-36
-173
-120
-218
+15
+175
+99
+220
 MALE50to80
 MALE50to80init
 5
@@ -446,10 +446,10 @@ MALE50to80init
 11
 
 MONITOR
-127
-172
-212
-217
+106
+174
+191
+219
 FEM50to80
 FEM50to80init
 5
@@ -457,10 +457,10 @@ FEM50to80init
 11
 
 MONITOR
-35
-220
-120
-265
+14
+222
+99
+267
 MALEover80
 MALEover80init
 5
@@ -468,10 +468,10 @@ MALEover80init
 11
 
 MONITOR
-127
-220
-213
-265
+106
+222
+192
+267
 FEMover80
 FEMover80init
 5
@@ -479,10 +479,10 @@ FEMover80init
 11
 
 MONITOR
-36
-319
-128
-364
+15
+321
+107
+366
 MALEunder50
 w_MALEunder50
 5
@@ -490,10 +490,10 @@ w_MALEunder50
 11
 
 MONITOR
-130
-319
-223
-364
+109
+321
+202
+366
 FEMunder50
 w_FEMunder50
 5
@@ -501,10 +501,10 @@ w_FEMunder50
 11
 
 MONITOR
-35
-368
-128
-413
+14
+370
+107
+415
 MALE50to80
 w_MALE50to80
 5
@@ -512,10 +512,10 @@ w_MALE50to80
 11
 
 MONITOR
-133
-368
-223
-413
+112
+370
+202
+415
 FEM50to80
 w_FEM50to80
 5
@@ -523,10 +523,10 @@ w_FEM50to80
 11
 
 MONITOR
-32
-414
-128
-459
+11
+416
+107
+461
 MALEover80
 w_MALEover80
 5
@@ -534,10 +534,10 @@ w_MALEover80
 11
 
 MONITOR
-132
-415
-223
-460
+111
+417
+202
+462
 FEMover80
 w_FEMover80
 5
@@ -556,11 +556,11 @@ seed_comparison?
 -1000
 
 PLOT
-1167
-34
-1327
-154
-%MALEunder50
+1123
+11
+1283
+131
+NIL
 NIL
 NIL
 0.0
@@ -571,14 +571,14 @@ true
 false
 "" ""
 PENS
-"default" 1.0 1 -16777216 true "plot MALEunder50 / (TGTmale + TGTfemale)" "plot MALEunder50 / (TGTmale + TGTfemale)"
+"default" 1.0 1 -16777216 true "plot MALEunder50 / (male + female)" "plot MALEunder50 / (male + female)"
 
 PLOT
-1329
-34
-1489
-154
-%FEMunder50
+1295
+11
+1460
+131
+NIL
 NIL
 NIL
 0.0
@@ -589,14 +589,14 @@ true
 false
 "" ""
 PENS
-"default" 1.0 1 -16777216 true "plot FEMunder50 / (TGTmale + TGTfemale)" "plot FEMunder50 / (TGTmale + TGTfemale)"
+"default" 1.0 1 -16777216 true "plot FEMunder50 / (male + female)" "plot FEMunder50 / (male + female)"
 
 PLOT
-1168
-193
-1328
-313
-%MALE50to80
+1126
+142
+1288
+262
+NIL
 NIL
 NIL
 0.0
@@ -607,14 +607,14 @@ true
 false
 "" ""
 PENS
-"default" 1.0 1 -16777216 true "plot MALE50to80 / (TGTmale + TGTfemale)" "plot MALE50to80 / (TGTmale + TGTfemale)"
+"default" 1.0 1 -16777216 true "plot MALE50to80 / (male + female)" "plot MALE50to80 / (male + female)"
 
 PLOT
-1331
-194
-1491
-314
-%FEM50to80
+1294
+139
+1461
+260
+NIL
 NIL
 NIL
 0.0
@@ -625,14 +625,14 @@ true
 false
 "" ""
 PENS
-"default" 1.0 1 -16777216 true "plot FEM50to80 / (TGTmale + TGTfemale)" "plot FEM50to80 / (TGTmale + TGTfemale)"
+"default" 1.0 1 -16777216 true "plot FEM50to80 / (male + female)" "plot FEM50to80 / (male + female)"
 
 PLOT
-1171
-363
-1331
-483
-%MALEover80
+1124
+280
+1289
+400
+NIL
 NIL
 NIL
 0.0
@@ -643,14 +643,14 @@ true
 false
 "" ""
 PENS
-"default" 1.0 1 -16777216 true "plot MALEover80 / (TGTmale + TGTfemale)" "plot MALEover80 / (TGTmale + TGTfemale)"
+"default" 1.0 1 -16777216 true "plot MALEover80 / (male + female)" "plot MALEover80 / (male + female)"
 
 PLOT
-1336
-365
-1496
-485
-%FEMover80
+1295
+277
+1460
+397
+NIL
 NIL
 NIL
 0.0
@@ -661,32 +661,32 @@ true
 false
 "" ""
 PENS
-"default" 1.0 1 -16777216 true "plot FEMover80 / (TGTmale + TGTfemale)" "plot FEMover80 / (TGTmale + TGTfemale)"
+"default" 1.0 1 -16777216 true "plot FEMover80 / (male + female)" "plot FEMover80 / (male + female)"
 
 TEXTBOX
-61
-296
-211
-314
+40
+298
+190
+316
 Weights to each category
 12
 0.0
 1
 
 TEXTBOX
-73
-100
-174
-118
+52
+102
+153
+120
 Original sample
 12
 0.0
 1
 
 TEXTBOX
-436
+397
 538
-531
+492
 567
 COMPILE IPF\nuntil convergence
 12
@@ -724,19 +724,19 @@ TEXTBOX
 1
 
 TEXTBOX
-727
-435
-847
-457
+692
+464
+812
+486
 Total Absolute Error
 13
 0.0
 1
 
 TEXTBOX
-735
+697
 10
-862
+824
 58
 Include values for the target population (sumcol == sumrow!)\n
 13
@@ -744,9 +744,9 @@ Include values for the target population (sumcol == sumrow!)\n
 1
 
 TEXTBOX
-475
+437
 96
-549
+511
 114
 fitted values
 13
@@ -754,9 +754,9 @@ fitted values
 1
 
 TEXTBOX
-632
+594
 112
-727
+689
 130
 fitted marginals
 13
@@ -764,9 +764,9 @@ fitted marginals
 1
 
 TEXTBOX
-744
+706
 79
-857
+819
 109
 target marginals\n(known population)
 12
@@ -774,9 +774,9 @@ target marginals\n(known population)
 1
 
 TEXTBOX
-731
+693
 75
-752
+714
 367
 I\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI
 12
@@ -784,9 +784,9 @@ I\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\
 1
 
 TEXTBOX
-333
+295
 360
-729
+691
 378
 — — — — — — — — — — — — — — — — — — — — — — — — — — — —
 12
@@ -794,9 +794,9 @@ TEXTBOX
 1
 
 TEXTBOX
-621
+583
 81
-636
+598
 299
 I\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI
 10
@@ -804,9 +804,9 @@ I\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\
 1
 
 TEXTBOX
-347
+309
 293
-624
+586
 315
 — — — — — — — — — — — — — — — — — — — — — — — — — — 
 9
@@ -814,16 +814,16 @@ TEXTBOX
 1
 
 OUTPUT
-900
+856
 29
-1140
+1096
 599
 10
 
 TEXTBOX
-958
+914
 10
-1108
+1064
 28
 Update iterations
 12
@@ -831,9 +831,9 @@ Update iterations
 1
 
 TEXTBOX
-268
+230
 397
-396
+358
 446
 Include values for the target population (sumcol == sumrow!)
 13
@@ -841,9 +841,9 @@ Include values for the target population (sumcol == sumrow!)
 1
 
 TEXTBOX
-397
+359
 404
-421
+383
 433
 ►
 24
@@ -861,9 +861,9 @@ TEXTBOX
 1
 
 TEXTBOX
-773
+735
 57
-799
+761
 86
 ▼
 24
@@ -871,9 +871,9 @@ TEXTBOX
 1
 
 TEXTBOX
-533
+494
 497
-578
+539
 526
 ▼
 24
@@ -881,76 +881,268 @@ TEXTBOX
 1
 
 MONITOR
-1201
-17
-1305
-62
+1193
+10
+1283
+55
 %MALEunder50
-MALEunder50 / (TGTmale + TGTfemale)
-2
+MALEunder50 / (male + female)
+5
 1
 11
 
 MONITOR
-1365
-17
-1462
-62
+1375
+10
+1460
+55
 %FEMunder50
-FEMunder50 / (TGTmale + TGTfemale)
-2
+FEMunder50 / (male + female)
+5
 1
 11
 
 MONITOR
-1206
-179
-1304
-224
+1190
+143
+1288
+188
 %MALE50to80
-MALE50to80 / (TGTmale + TGTfemale)
-2
+MALE50to80 / (male + female)
+5
 1
 11
 
 MONITOR
-1372
-182
-1462
-227
+1370
+139
+1460
+184
 %FEM50to80
-FEM50to80 / (TGTmale + TGTfemale)
-2
+FEM50to80 / (male + female)
+5
 1
 11
 
 MONITOR
-1204
-347
-1301
-392
+1193
+278
+1290
+323
 %MALEover80
-MALEover80 / (TGTmale + TGTfemale)
-2
+MALEover80 / (male + female)
+5
 1
 11
 
 MONITOR
 1372
-350
+277
 1461
-395
+322
 %FEMover80
-FEMover80 / (TGTmale + TGTfemale)
-2
+FEMover80 / (male + female)
+5
 1
 11
+
+MONITOR
+1381
+424
+1467
+469
+%TGTunder50
+TGTunder50 / (TGTunder50 + TGT50to80 + TGTover80)
+5
+1
+11
+
+MONITOR
+1382
+473
+1466
+518
+%TGT50to80
+TGT50to80 / (TGTunder50 + TGT50to80 + TGTover80)
+5
+1
+11
+
+MONITOR
+1385
+520
+1466
+565
+%TGTover80
+TGTover80 / (TGTunder50 + TGT50to80 + TGTover80)
+5
+1
+11
+
+MONITOR
+1168
+575
+1257
+620
+%TGTmale
+TGTmale /  (TGTmale + TGTfemale)
+5
+1
+11
+
+MONITOR
+1268
+574
+1351
+619
+%TGTfemale
+TGTfemale / (TGTmale + TGTfemale)
+5
+1
+11
+
+MONITOR
+1172
+426
+1262
+471
+%MALEunder50
+MALEunder50 / (male + female)
+5
+1
+11
+
+MONITOR
+1171
+473
+1261
+518
+%MALE50to80
+MALE50to80 / (male + female)
+5
+1
+11
+
+MONITOR
+1171
+518
+1261
+563
+%MALEover80
+MALEover80 / (male + female)
+5
+1
+11
+
+MONITOR
+1270
+425
+1355
+470
+%FEMunder50
+FEMunder50 / (male + female)
+5
+1
+11
+
+MONITOR
+1271
+472
+1355
+517
+%FEM50to80
+FEM50to80 / (male + female)
+5
+1
+11
+
+MONITOR
+1272
+518
+1353
+563
+%FEMover80
+FEMover80 / (male + female)
+5
+1
+11
+
+TEXTBOX
+1158
+405
+1423
+423
+>>>> shown as percentage <<<<
+15
+0.0
+1
+
+TEXTBOX
+1369
+422
+1384
+562
+I\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI
+10
+0.0
+1
+
+TEXTBOX
+1156
+560
+1383
+578
+— — — — — — — — — — — — — — — — — — — — — — 
+10
+0.0
+1
+
+TEXTBOX
+1116
+444
+1166
+494
+synthetic population
+10
+0.0
+1
+
+TEXTBOX
+1382
+577
+1441
+595
+target
+10
+0.0
+1
+
+TEXTBOX
+1475
+425
+1490
+622
+I\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI
+10
+0.0
+1
+
+TEXTBOX
+1159
+618
+1495
+636
+— — — — — — — — — — — — — — — — — — — — — — — — — 
+10
+0.0
+1
 
 @#$#@#$#@
 ## WHAT IS IT?
 
 The model formalizes the Iterative Proportional Fitting (IPF), a technique used for synthetic reconstruction, used to derive the properties of agents from the known marginal distribution of a target population. 
-The model provides weights to adapt to an artificial population, so to be representative of the target population
+The model provides weights to adapt to an artificial population, so to be representative of the target population. In the specific case, the raw number for each category are reported.
+In the bottom right corner, results are converted into percentage for each joint category to approximate to the real population. The percentages can be used to initialize a synthetic population of any other size.
 
 ## LITERATURE CONTEXT
 
