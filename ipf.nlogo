@@ -89,10 +89,10 @@ set w_FEMover80 (FEMover80 / FEMover80init)
   end
 @#$#@#$#@
 GRAPHICS-WINDOW
-731
-377
-796
-443
+643
+367
+708
+433
 -1
 -1
 1.73
@@ -133,10 +133,10 @@ NIL
 1
 
 INPUTBOX
-710
-116
-789
-176
+622
+106
+701
+166
 TGTunder50
 20.0
 1
@@ -144,10 +144,10 @@ TGTunder50
 Number
 
 INPUTBOX
-712
-184
-788
-244
+624
+174
+700
+234
 TGT50to80
 30.0
 1
@@ -155,10 +155,10 @@ TGT50to80
 Number
 
 INPUTBOX
-396
-390
-480
-450
+308
+380
+392
+440
 TGTmale
 56.0
 1
@@ -166,10 +166,10 @@ TGTmale
 Number
 
 INPUTBOX
-483
-389
-573
-449
+395
+379
+485
+439
 TGTfemale
 44.0
 1
@@ -177,10 +177,10 @@ TGTfemale
 Number
 
 INPUTBOX
-709
-249
-788
-309
+621
+239
+700
+299
 TGTover80
 50.0
 1
@@ -188,20 +188,20 @@ TGTover80
 Number
 
 TEXTBOX
-800
-208
-827
-226
+710
+193
+737
+211
 AGE
 13
 0.0
 1
 
 TEXTBOX
-488
-470
-550
-488
+473
+453
+535
+471
 GENDER
 13
 0.0
@@ -225,10 +225,10 @@ NIL
 1
 
 MONITOR
-391
-123
-482
-168
+303
+113
+394
+158
 MALEunder50
 MALEunder50
 5
@@ -236,10 +236,10 @@ MALEunder50
 11
 
 MONITOR
-595
-135
-689
-180
+507
+125
+601
+170
 FITTEDunder50
 under50
 5
@@ -247,32 +247,32 @@ under50
 11
 
 MONITOR
-486
-122
-571
-167
-FEMunder50
-FEMunder50
-5
-1
-11
-
-MONITOR
-392
-172
-477
-217
-MALE50to80
-MALE50to80
-5
-1
-11
-
-MONITOR
+398
+112
 483
-172
-573
-217
+157
+FEMunder50
+FEMunder50
+5
+1
+11
+
+MONITOR
+304
+162
+389
+207
+MALE50to80
+MALE50to80
+5
+1
+11
+
+MONITOR
+395
+162
+485
+207
 FEM50to80
 FEM50to80
 5
@@ -280,10 +280,10 @@ FEM50to80
 11
 
 MONITOR
-593
-188
-689
-233
+505
+178
+601
+223
 FITTED50to80
 from50to80
 5
@@ -291,10 +291,10 @@ from50to80
 11
 
 MONITOR
-391
-226
-476
-271
+303
+216
+388
+261
 MALEover80
 MALEover80
 5
@@ -302,10 +302,10 @@ MALEover80
 11
 
 MONITOR
-481
-226
-570
-271
+393
+216
+482
+261
 FEMover80
 FEMover80
 5
@@ -313,10 +313,10 @@ FEMover80
 11
 
 MONITOR
-592
-239
-687
-284
+504
+228
+599
+273
 FITTEDover80
 over80
 5
@@ -324,10 +324,10 @@ over80
 11
 
 MONITOR
-393
-313
-476
-358
+305
+303
+388
+348
 FITTEDmale
 male
 5
@@ -335,10 +335,10 @@ male
 11
 
 MONITOR
-483
-312
-573
-357
+395
+302
+485
+347
 FITTEDfemale
 female
 5
@@ -363,10 +363,10 @@ NIL
 1
 
 MONITOR
-708
-487
-786
-532
+624
+471
+702
+516
 TAE
 TAE
 5
@@ -374,10 +374,10 @@ TAE
 11
 
 BUTTON
-500
-535
-614
-568
+490
+515
+604
+548
 update_weights
 update_weights
 NIL
@@ -391,10 +391,10 @@ NIL
 1
 
 MONITOR
-721
-313
-778
-358
+633
+303
+690
+348
 sumcol
 TGTunder50 + TGT50to80 + TGTover80
 17
@@ -402,10 +402,10 @@ TGTunder50 + TGT50to80 + TGTover80
 11
 
 MONITOR
-581
-397
-639
-442
+493
+387
+551
+432
 sumrow
 TGTmale + TGTfemale
 17
@@ -556,9 +556,9 @@ seed_comparison?
 -1000
 
 PLOT
-1123
+985
 11
-1283
+1148
 131
 NIL
 NIL
@@ -574,10 +574,10 @@ PENS
 "default" 1.0 1 -16777216 true "plot MALEunder50 / (male + female)" "plot MALEunder50 / (male + female)"
 
 PLOT
-1295
-11
-1460
-131
+985
+137
+1150
+257
 NIL
 NIL
 NIL
@@ -592,10 +592,10 @@ PENS
 "default" 1.0 1 -16777216 true "plot FEMunder50 / (male + female)" "plot FEMunder50 / (male + female)"
 
 PLOT
-1126
-142
-1288
-262
+1157
+10
+1319
+130
 NIL
 NIL
 NIL
@@ -610,10 +610,10 @@ PENS
 "default" 1.0 1 -16777216 true "plot MALE50to80 / (male + female)" "plot MALE50to80 / (male + female)"
 
 PLOT
-1294
-139
-1461
-260
+1156
+135
+1323
+256
 NIL
 NIL
 NIL
@@ -628,10 +628,10 @@ PENS
 "default" 1.0 1 -16777216 true "plot FEM50to80 / (male + female)" "plot FEM50to80 / (male + female)"
 
 PLOT
-1124
-280
-1289
-400
+1327
+10
+1492
+130
 NIL
 NIL
 NIL
@@ -646,10 +646,10 @@ PENS
 "default" 1.0 1 -16777216 true "plot MALEover80 / (male + female)" "plot MALEover80 / (male + female)"
 
 PLOT
-1295
-277
-1460
-397
+1328
+138
+1493
+258
 NIL
 NIL
 NIL
@@ -684,10 +684,10 @@ Original sample
 1
 
 TEXTBOX
-397
-538
-492
-567
+387
+518
+482
+547
 COMPILE IPF\nuntil convergence
 12
 0.0
@@ -724,127 +724,127 @@ TEXTBOX
 1
 
 TEXTBOX
-692
-464
-812
-486
+602
+453
+722
+475
 Total Absolute Error
 13
 0.0
 1
 
 TEXTBOX
-697
+575
 10
-824
-58
+742
+41
 Include values for the target population (sumcol == sumrow!)\n
-13
+11
 0.0
 1
 
 TEXTBOX
-437
-96
-511
-114
+349
+86
+423
+104
 fitted values
 13
 0.0
 1
 
 TEXTBOX
-594
-112
-689
-130
+506
+102
+601
+120
 fitted marginals
 13
 0.0
 1
 
 TEXTBOX
-706
-79
-819
-109
+618
+69
+731
+99
 target marginals\n(known population)
 12
 0.0
 1
 
 TEXTBOX
-693
-75
-714
-367
+605
+65
+626
+357
 I\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI
 12
 0.0
 1
 
 TEXTBOX
-295
-360
-691
-378
-— — — — — — — — — — — — — — — — — — — — — — — — — — — —
+322
+353
+609
+371
+— — — — — — — — — — — — — — — — — — — 
 12
 0.0
 1
 
 TEXTBOX
-583
-81
-598
-299
+495
+71
+510
+289
 I\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI
 10
 0.0
 1
 
 TEXTBOX
-309
-293
-586
-315
-— — — — — — — — — — — — — — — — — — — — — — — — — — 
+301
+285
+578
+307
+— — — — — — — — — — — — — — — — — — — 
 9
 0.0
 1
 
 OUTPUT
-856
-29
-1096
-599
+744
+30
+954
+600
 10
 
 TEXTBOX
-914
-10
-1064
-28
+802
+11
+952
+29
 Update iterations
 12
 0.0
 1
 
 TEXTBOX
-230
-397
-358
-446
+208
+377
+294
+454
 Include values for the target population (sumcol == sumrow!)
-13
+11
 0.0
 1
 
 TEXTBOX
-359
-404
-383
-433
+283
+390
+307
+419
 ►
 24
 0.0
@@ -861,29 +861,29 @@ TEXTBOX
 1
 
 TEXTBOX
-735
-57
-761
-86
+647
+47
+673
+76
 ▼
 24
 0.0
 1
 
 TEXTBOX
-494
-497
-539
-526
+484
+477
+529
+506
 ▼
 24
 0.0
 1
 
 MONITOR
-1193
+1058
 10
-1283
+1148
 55
 %MALEunder50
 MALEunder50 / (male + female)
@@ -892,10 +892,10 @@ MALEunder50 / (male + female)
 11
 
 MONITOR
-1375
-10
-1460
-55
+1065
+136
+1150
+181
 %FEMunder50
 FEMunder50 / (male + female)
 5
@@ -903,10 +903,10 @@ FEMunder50 / (male + female)
 11
 
 MONITOR
-1190
-143
-1288
-188
+1221
+11
+1319
+56
 %MALE50to80
 MALE50to80 / (male + female)
 5
@@ -914,10 +914,10 @@ MALE50to80 / (male + female)
 11
 
 MONITOR
-1370
-139
-1460
-184
+1232
+135
+1322
+180
 %FEM50to80
 FEM50to80 / (male + female)
 5
@@ -925,10 +925,10 @@ FEM50to80 / (male + female)
 11
 
 MONITOR
-1193
-278
-1290
-323
+1395
+10
+1492
+55
 %MALEover80
 MALEover80 / (male + female)
 5
@@ -936,10 +936,10 @@ MALEover80 / (male + female)
 11
 
 MONITOR
-1372
-277
-1461
-322
+1405
+138
+1494
+183
 %FEMover80
 FEMover80 / (male + female)
 5
@@ -947,10 +947,10 @@ FEMover80 / (male + female)
 11
 
 MONITOR
-1381
-424
-1467
-469
+1399
+310
+1485
+355
 %TGTunder50
 TGTunder50 / (TGTunder50 + TGT50to80 + TGTover80)
 5
@@ -958,10 +958,10 @@ TGTunder50 / (TGTunder50 + TGT50to80 + TGTover80)
 11
 
 MONITOR
-1382
-473
-1466
-518
+1400
+359
+1484
+404
 %TGT50to80
 TGT50to80 / (TGTunder50 + TGT50to80 + TGTover80)
 5
@@ -969,10 +969,10 @@ TGT50to80 / (TGTunder50 + TGT50to80 + TGTover80)
 11
 
 MONITOR
-1385
-520
-1466
-565
+1403
+406
+1484
+451
 %TGTover80
 TGTover80 / (TGTunder50 + TGT50to80 + TGTover80)
 5
@@ -980,10 +980,10 @@ TGTover80 / (TGTunder50 + TGT50to80 + TGTover80)
 11
 
 MONITOR
-1168
-575
-1257
-620
+1052
+527
+1141
+572
 %TGTmale
 TGTmale /  (TGTmale + TGTfemale)
 5
@@ -991,10 +991,10 @@ TGTmale /  (TGTmale + TGTfemale)
 11
 
 MONITOR
-1268
-574
-1351
-619
+1152
+526
+1235
+571
 %TGTfemale
 TGTfemale / (TGTmale + TGTfemale)
 5
@@ -1002,10 +1002,10 @@ TGTfemale / (TGTmale + TGTfemale)
 11
 
 MONITOR
-1172
-426
-1262
-471
+1051
+311
+1141
+356
 %MALEunder50
 MALEunder50 / (male + female)
 5
@@ -1013,10 +1013,10 @@ MALEunder50 / (male + female)
 11
 
 MONITOR
-1171
-473
-1261
-518
+1050
+358
+1140
+403
 %MALE50to80
 MALE50to80 / (male + female)
 5
@@ -1024,10 +1024,10 @@ MALE50to80 / (male + female)
 11
 
 MONITOR
-1171
-518
-1261
-563
+1050
+403
+1140
+448
 %MALEover80
 MALEover80 / (male + female)
 5
@@ -1035,10 +1035,10 @@ MALEover80 / (male + female)
 11
 
 MONITOR
-1270
-425
-1355
-470
+1149
+310
+1234
+355
 %FEMunder50
 FEMunder50 / (male + female)
 5
@@ -1046,10 +1046,10 @@ FEMunder50 / (male + female)
 11
 
 MONITOR
-1271
-472
-1355
-517
+1150
+357
+1234
+402
 %FEM50to80
 FEM50to80 / (male + female)
 5
@@ -1057,10 +1057,10 @@ FEM50to80 / (male + female)
 11
 
 MONITOR
-1272
-518
-1353
-563
+1151
+403
+1232
+448
 %FEMover80
 FEMover80 / (male + female)
 5
@@ -1068,71 +1068,136 @@ FEMover80 / (male + female)
 11
 
 TEXTBOX
-1158
-405
-1423
-423
+1010
+270
+1275
+288
 >>>> shown as percentage <<<<
 15
 0.0
 1
 
 TEXTBOX
-1369
-422
-1384
-562
+1248
+307
+1263
+447
 I\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI
 10
 0.0
 1
 
 TEXTBOX
-1156
-560
-1383
-578
+1035
+445
+1262
+463
 — — — — — — — — — — — — — — — — — — — — — — 
 10
 0.0
 1
 
 TEXTBOX
-1116
-444
-1166
-494
+995
+329
+1045
+379
 synthetic population
 10
 0.0
 1
 
 TEXTBOX
-1382
-577
-1441
-595
-target
+1404
+290
+1487
+308
+target marginals
 10
 0.0
 1
 
 TEXTBOX
-1475
-425
-1490
-622
+1378
+305
+1393
+502
 I\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI
 10
 0.0
 1
 
 TEXTBOX
-1159
-618
-1495
-636
-— — — — — — — — — — — — — — — — — — — — — — — — — 
+1035
+511
+1412
+529
+— — — — — — — — — — — — — — — — — — — — — — — — — — —
+10
+0.0
+1
+
+MONITOR
+1261
+312
+1364
+357
+%FITTEDunder50
+under50 / (\nMALEunder50 + FEMunder50 + MALE50to80 + FEM50to80 + MALEover80 + FEMover80)
+5
+1
+11
+
+MONITOR
+1260
+360
+1364
+405
+%FITTED50to80
+from50to80 / (\nMALEunder50 + FEMunder50 + MALE50to80 + FEM50to80 + MALEover80 + FEMover80)
+5
+1
+11
+
+MONITOR
+1259
+406
+1367
+451
+%FITTEDover80
+over80 / (\nMALEunder50 + FEMunder50 + MALE50to80 + FEM50to80 + MALEover80 + FEMover80)
+5
+1
+11
+
+MONITOR
+1052
+462
+1143
+507
+%FITTEDmale
+male / (\nMALEunder50 + FEMunder50 + MALE50to80 + FEM50to80 + MALEover80 + FEMover80)
+5
+1
+11
+
+MONITOR
+1151
+459
+1244
+504
+%FITTEDfemale
+female / (\nMALEunder50 + FEMunder50 + MALE50to80 + FEM50to80 + MALEover80 + FEMover80)
+5
+1
+11
+
+TEXTBOX
+1277
+290
+1353
+308
+fitted marginals
 10
 0.0
 1
