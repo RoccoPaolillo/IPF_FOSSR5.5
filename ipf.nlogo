@@ -1,3 +1,4 @@
+extensions [csv]
 globals[
   MALEunder50init FEMunder50init MALE50to80init FEM50to80init MALEover80init FEMover80init ; initial random values of sample
   MALEunder50 FEMunder50 MALE50to80 FEM50to80 MALEover80 FEMover80              ; fitted values of sample. Repeated just to keep record of initial values
@@ -8,18 +9,21 @@ globals[
   male ; marginals male
   female  ; marginals females
   TAE ; Total Absolute Error
+  TGTjoinISTAT
+  TGTageISTAT
+  TGTgenderISTAT
 ]
 
 to sample_extraction
   clear-all
   reset-ticks
   ifelse seed_comparison? [random-seed 52682][]
-set MALEunder50init random 1000 ; initial values sample
-set FEMunder50init random 1000
-set MALE50to80init random 1000
-set FEM50to80init random 1000
-set MALEover80init random 1000
-set FEMover80init random 1000
+set MALEunder50init 1   ; initial values sample
+set FEMunder50init 1
+set MALE50to80init 1
+set FEM50to80init  1
+set MALEover80init  1
+set FEMover80init 1
 
   set MALEunder50 MALEunder50init  ; Repeated just to keep record of initial values
 set FEMunder50 FEMunder50init
@@ -89,10 +93,10 @@ set w_FEMover80 (FEMover80 / FEMover80init)
   end
 @#$#@#$#@
 GRAPHICS-WINDOW
-643
-367
-708
-433
+1412
+524
+1477
+590
 -1
 -1
 1.73
@@ -138,7 +142,7 @@ INPUTBOX
 701
 166
 TGTunder50
-20.0
+3.189828E7
 1
 0
 Number
@@ -149,18 +153,18 @@ INPUTBOX
 700
 234
 TGT50to80
-30.0
+2.288711E7
 1
 0
 Number
 
 INPUTBOX
 308
-380
+378
 392
-440
+438
 TGTmale
-56.0
+2.8749359E7
 1
 0
 Number
@@ -171,7 +175,7 @@ INPUTBOX
 485
 439
 TGTfemale
-44.0
+3.0101358E7
 1
 0
 Number
@@ -182,7 +186,7 @@ INPUTBOX
 700
 299
 TGTover80
-50.0
+4065327.0
 1
 0
 Number
@@ -280,9 +284,9 @@ FEM50to80
 11
 
 MONITOR
-505
+506
 178
-601
+602
 223
 FITTED50to80
 from50to80
@@ -363,10 +367,10 @@ NIL
 1
 
 MONITOR
-624
-471
-702
-516
+609
+406
+687
+451
 TAE
 TAE
 5
@@ -393,7 +397,7 @@ NIL
 MONITOR
 633
 303
-690
+707
 348
 sumcol
 TGTunder50 + TGT50to80 + TGTover80
@@ -404,7 +408,7 @@ TGTunder50 + TGT50to80 + TGTover80
 MONITOR
 493
 387
-551
+569
 432
 sumrow
 TGTmale + TGTfemale
@@ -479,10 +483,10 @@ FEMover80init
 11
 
 MONITOR
-15
-321
-107
-366
+16
+322
+108
+367
 MALEunder50
 w_MALEunder50
 5
@@ -724,10 +728,10 @@ TEXTBOX
 1
 
 TEXTBOX
-602
-453
-722
-475
+587
+388
+707
+410
 Total Absolute Error
 13
 0.0
@@ -814,17 +818,17 @@ TEXTBOX
 1
 
 OUTPUT
-744
-30
-954
-600
+756
+29
+966
+377
 10
 
 TEXTBOX
-802
-11
-952
-29
+814
+10
+964
+28
 Update iterations
 12
 0.0
@@ -947,10 +951,10 @@ FEMover80 / (male + female)
 11
 
 MONITOR
-1399
-310
-1485
-355
+1412
+342
+1498
+387
 %TGTunder50
 TGTunder50 / (TGTunder50 + TGT50to80 + TGTover80)
 5
@@ -958,10 +962,10 @@ TGTunder50 / (TGTunder50 + TGT50to80 + TGTover80)
 11
 
 MONITOR
-1400
-359
-1484
-404
+1413
+391
+1497
+436
 %TGT50to80
 TGT50to80 / (TGTunder50 + TGT50to80 + TGTover80)
 5
@@ -969,10 +973,10 @@ TGT50to80 / (TGTunder50 + TGT50to80 + TGTover80)
 11
 
 MONITOR
-1403
-406
-1484
-451
+1416
+438
+1497
+483
 %TGTover80
 TGTover80 / (TGTunder50 + TGT50to80 + TGTover80)
 5
@@ -980,10 +984,10 @@ TGTover80 / (TGTunder50 + TGT50to80 + TGTover80)
 11
 
 MONITOR
-1052
-527
-1141
-572
+1069
+548
+1158
+593
 %TGTmale
 TGTmale /  (TGTmale + TGTfemale)
 5
@@ -991,10 +995,10 @@ TGTmale /  (TGTmale + TGTfemale)
 11
 
 MONITOR
-1152
-526
-1235
-571
+1169
+547
+1252
+592
 %TGTfemale
 TGTfemale / (TGTmale + TGTfemale)
 5
@@ -1002,10 +1006,10 @@ TGTfemale / (TGTmale + TGTfemale)
 11
 
 MONITOR
-1051
-311
-1141
-356
+1064
+343
+1154
+388
 %MALEunder50
 MALEunder50 / (male + female)
 5
@@ -1013,10 +1017,10 @@ MALEunder50 / (male + female)
 11
 
 MONITOR
-1050
-358
-1140
-403
+1063
+390
+1153
+435
 %MALE50to80
 MALE50to80 / (male + female)
 5
@@ -1024,10 +1028,10 @@ MALE50to80 / (male + female)
 11
 
 MONITOR
-1050
-403
-1140
-448
+1063
+435
+1153
+480
 %MALEover80
 MALEover80 / (male + female)
 5
@@ -1035,10 +1039,10 @@ MALEover80 / (male + female)
 11
 
 MONITOR
-1149
-310
-1234
-355
+1162
+342
+1247
+387
 %FEMunder50
 FEMunder50 / (male + female)
 5
@@ -1046,10 +1050,10 @@ FEMunder50 / (male + female)
 11
 
 MONITOR
-1150
-357
-1234
-402
+1163
+389
+1247
+434
 %FEM50to80
 FEM50to80 / (male + female)
 5
@@ -1057,10 +1061,10 @@ FEM50to80 / (male + female)
 11
 
 MONITOR
-1151
-403
-1232
-448
+1164
+435
+1245
+480
 %FEMover80
 FEMover80 / (male + female)
 5
@@ -1068,80 +1072,80 @@ FEMover80 / (male + female)
 11
 
 TEXTBOX
-1010
-270
-1275
-288
+1019
+313
+1284
+331
 >>>> shown as percentage <<<<
 15
 0.0
 1
 
 TEXTBOX
-1248
-307
-1263
-447
+1261
+339
+1276
+479
 I\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI
 10
 0.0
 1
 
 TEXTBOX
-1035
-445
-1262
-463
+1048
+477
+1275
+495
 — — — — — — — — — — — — — — — — — — — — — — 
 10
 0.0
 1
 
 TEXTBOX
-995
-329
-1045
-379
+1008
+361
+1058
+411
 synthetic population
 10
 0.0
 1
 
 TEXTBOX
-1404
-290
-1487
-308
+1417
+322
+1500
+340
 target marginals
 10
 0.0
 1
 
 TEXTBOX
-1378
-305
-1393
-502
+1391
+337
+1406
+534
 I\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI\nI
 10
 0.0
 1
 
 TEXTBOX
-1035
-511
-1412
-529
+1048
+535
+1425
+553
 — — — — — — — — — — — — — — — — — — — — — — — — — — —
 10
 0.0
 1
 
 MONITOR
-1261
-312
-1364
-357
+1274
+344
+1377
+389
 %FITTEDunder50
 under50 / (\nMALEunder50 + FEMunder50 + MALE50to80 + FEM50to80 + MALEover80 + FEMover80)
 5
@@ -1149,10 +1153,10 @@ under50 / (\nMALEunder50 + FEMunder50 + MALE50to80 + FEM50to80 + MALEover80 + FE
 11
 
 MONITOR
-1260
-360
-1364
-405
+1273
+392
+1377
+437
 %FITTED50to80
 from50to80 / (\nMALEunder50 + FEMunder50 + MALE50to80 + FEM50to80 + MALEover80 + FEMover80)
 5
@@ -1160,10 +1164,10 @@ from50to80 / (\nMALEunder50 + FEMunder50 + MALE50to80 + FEM50to80 + MALEover80 +
 11
 
 MONITOR
-1259
-406
-1367
-451
+1272
+438
+1383
+483
 %FITTEDover80
 over80 / (\nMALEunder50 + FEMunder50 + MALE50to80 + FEM50to80 + MALEover80 + FEMover80)
 5
@@ -1171,10 +1175,10 @@ over80 / (\nMALEunder50 + FEMunder50 + MALE50to80 + FEM50to80 + MALEover80 + FEM
 11
 
 MONITOR
-1052
-462
-1143
-507
+1065
+494
+1156
+539
 %FITTEDmale
 male / (\nMALEunder50 + FEMunder50 + MALE50to80 + FEM50to80 + MALEover80 + FEMover80)
 5
@@ -1182,10 +1186,10 @@ male / (\nMALEunder50 + FEMunder50 + MALE50to80 + FEM50to80 + MALEover80 + FEMov
 11
 
 MONITOR
-1151
-459
-1244
-504
+1164
+491
+1257
+536
 %FITTEDfemale
 female / (\nMALEunder50 + FEMunder50 + MALE50to80 + FEM50to80 + MALEover80 + FEMover80)
 5
@@ -1193,11 +1197,168 @@ female / (\nMALEunder50 + FEMunder50 + MALE50to80 + FEM50to80 + MALEover80 + FEM
 11
 
 TEXTBOX
-1277
-290
-1353
-308
+1290
+322
+1366
+340
 fitted marginals
+10
+0.0
+1
+
+MONITOR
+747
+490
+827
+535
+TGTmale<50
+16254113 / 58850717
+5
+1
+11
+
+MONITOR
+916
+486
+992
+531
+TGTmale>80
+1532990 / 58850717
+5
+1
+11
+
+MONITOR
+829
+489
+908
+534
+TGTmale5080
+10962256 / 58850717
+5
+1
+11
+
+MONITOR
+747
+537
+827
+582
+TGTfem<50
+15644167 / 58850717
+5
+1
+11
+
+MONITOR
+913
+534
+987
+579
+TGTfem>80
+2532337 / 58850717
+5
+1
+11
+
+MONITOR
+829
+536
+909
+581
+TGTfem5080
+11924854 / 58850717
+5
+1
+11
+
+TEXTBOX
+780
+471
+930
+489
+% joint category target ISTAT
+10
+0.0
+1
+
+BUTTON
+742
+431
+825
+464
+TGT_joint
+set TGTjoinISTAT csv:from-file \"C:/Users/rocpa/OneDrive/Desktop/ROME_CNR/WP5/dfcrossed_istat.csv\"\nshow TGTjoinISTAT
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+BUTTON
+827
+431
+908
+464
+TGT_age
+set TGTageISTAT csv:from-file \"C:/Users/rocpa/OneDrive/Desktop/ROME_CNR/WP5/dfage_istat.csv\"\nshow TGTageISTAT
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+BUTTON
+911
+432
+991
+465
+TGT_gen
+set TGTgenderISTAT csv:from-file \"C:/Users/rocpa/OneDrive/Desktop/ROME_CNR/WP5/dfgen_istat.csv\"\nshow TGTgenderISTAT
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+TEXTBOX
+727
+410
+1027
+428
+--------------------------TGT ISTAT data -----------------------
+10
+0.0
+1
+
+TEXTBOX
+720
+420
+735
+576
+|\n|\n|\n|\n|\n|\n|\n|\n|\n|\n|\n|\n
+10
+0.0
+1
+
+TEXTBOX
+1005
+418
+1020
+574
+|\n|\n|\n|\n|\n|\n|\n|\n|\n|\n|\n|\n
 10
 0.0
 1
@@ -1227,10 +1388,13 @@ IPF is the archetypal technique in SR (Lovelace et al., 2015; Chapuis, Taillandi
 
 IPF takes the data from a sample into a contingency table, the goal is to estimate weights for each cell (joint distribution) so that the fitted marginals computed become equivalent to the known marginals in the population. For each cell, the weight computed is the ratio of marginal distribution known in the population (target) by the fitted marginal distribution of the sample at each iteration. An iteration is the computation of weights by row (step 1, variable 1) and then columns (step 2, variable 2). The process is repeated a number of iterations until a benchmark is met. 
 
-Each cell at iteration 0 (i.e. the original sample) has weight 1.
+Each cell at iteration 0 (i.e. the original sample) has weight 1 and equal weight 1.
 
 TAE (Total Absolute Error) is one internal validation measure to the IPF algorithm. It is the absolute difference between known target marginal value and fitted marginal value. It should be close to zero, i.e. the values are similar.
 
+TGT_age, TGT_age, TGT_joint: empirical data that serve as target, both marginal and join distribution. Data are the age and gender of the Italian national population at 2023 retrieved at ISTAT, recoded separately (see R code): https://esploradati.istat.it/databrowser/#/it/dw/categories/IT1,POP,1.0/POP_POPULATION/DCIS_POPRES1/IT1,22_289_DF_DCIS_POPRES1_2,1.0 
+
+Marginal values in the TGT target boxes are already calibrated
 
 ## HOW TO USE IT
 
