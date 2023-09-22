@@ -18,7 +18,7 @@ to sample_extraction
   clear-all
   reset-ticks
   ifelse seed_comparison? [random-seed 52682][]
-set MALEunder50init 1   ; initial values sample
+set MALEunder50init 1  ; initial values sample
 set FEMunder50init 1
 set MALE50to80init 1
 set FEM50to80init  1
@@ -572,10 +572,11 @@ NIL
 0.0
 1.0
 true
-false
+true
 "" ""
 PENS
-"default" 1.0 1 -16777216 true "plot MALEunder50 / (male + female)" "plot MALEunder50 / (male + female)"
+"fitted" 1.0 1 -16777216 true "plot MALEunder50 / (male + female)" "plot MALEunder50 / (male + female)"
+"ISTAT" 1.0 1 -2674135 true "" "plot 16254113 / 58850717"
 
 PLOT
 985
@@ -590,16 +591,17 @@ NIL
 0.0
 1.0
 true
-false
+true
 "" ""
 PENS
-"default" 1.0 1 -16777216 true "plot FEMunder50 / (male + female)" "plot FEMunder50 / (male + female)"
+"fitted" 1.0 1 -16777216 true "plot FEMunder50 / (male + female)" "plot FEMunder50 / (male + female)"
+"ISTAT" 1.0 1 -2674135 true "" "plot 15644167 / 58850717"
 
 PLOT
-1157
-10
-1319
-130
+1155
+12
+1317
+132
 NIL
 NIL
 NIL
@@ -608,10 +610,11 @@ NIL
 0.0
 1.0
 true
-false
+true
 "" ""
 PENS
-"default" 1.0 1 -16777216 true "plot MALE50to80 / (male + female)" "plot MALE50to80 / (male + female)"
+"fitted" 1.0 1 -16777216 true "plot MALE50to80 / (male + female)" "plot MALE50to80 / (male + female)"
+"ISTAT" 1.0 1 -2674135 true "" "plot 10962256 / 58850717"
 
 PLOT
 1156
@@ -626,10 +629,11 @@ NIL
 0.0
 1.0
 true
-false
+true
 "" ""
 PENS
-"default" 1.0 1 -16777216 true "plot FEM50to80 / (male + female)" "plot FEM50to80 / (male + female)"
+"fitted" 1.0 1 -16777216 true "plot FEM50to80 / (male + female)" "plot FEM50to80 / (male + female)"
+"ISTAT" 1.0 1 -2674135 true "" "plot 11924854 / 58850717"
 
 PLOT
 1327
@@ -644,10 +648,11 @@ NIL
 0.0
 1.0
 true
-false
+true
 "" ""
 PENS
-"default" 1.0 1 -16777216 true "plot MALEover80 / (male + female)" "plot MALEover80 / (male + female)"
+"fitted" 1.0 1 -16777216 true "plot MALEover80 / (male + female)" "plot MALEover80 / (male + female)"
+"ISTAT" 1.0 1 -2674135 true "" "plot 1532990 / 58850717"
 
 PLOT
 1328
@@ -662,10 +667,11 @@ NIL
 0.0
 1.0
 true
-false
+true
 "" ""
 PENS
-"default" 1.0 1 -16777216 true "plot FEMover80 / (male + female)" "plot FEMover80 / (male + female)"
+"fitted" 1.0 1 -16777216 true "plot FEMover80 / (male + female)" "plot FEMover80 / (male + female)"
+"ISTAT" 1.0 1 -2674135 true "" "plot 2532337 / 58850717"
 
 TEXTBOX
 40
@@ -885,32 +891,32 @@ TEXTBOX
 1
 
 MONITOR
-1058
-10
+1078
+83
 1148
-55
-%MALEunder50
+128
+%MALE<50
 MALEunder50 / (male + female)
 5
 1
 11
 
 MONITOR
-1065
-136
+1085
+212
 1150
-181
-%FEMunder50
+257
+%FEM<50
 FEMunder50 / (male + female)
 5
 1
 11
 
 MONITOR
-1221
-11
-1319
-56
+1235
+87
+1320
+132
 %MALE50to80
 MALE50to80 / (male + female)
 5
@@ -918,10 +924,10 @@ MALE50to80 / (male + female)
 11
 
 MONITOR
-1232
-135
-1322
-180
+1244
+213
+1323
+258
 %FEM50to80
 FEM50to80 / (male + female)
 5
@@ -929,22 +935,22 @@ FEM50to80 / (male + female)
 11
 
 MONITOR
-1395
-10
-1492
-55
-%MALEover80
+1424
+87
+1493
+132
+%MALE>80
 MALEover80 / (male + female)
 5
 1
 11
 
 MONITOR
-1405
-138
-1494
-183
-%FEMover80
+1432
+215
+1495
+260
+%FEM>80
 FEMover80 / (male + female)
 5
 1
@@ -1166,7 +1172,7 @@ from50to80 / (\nMALEunder50 + FEMunder50 + MALE50to80 + FEM50to80 + MALEover80 +
 MONITOR
 1272
 438
-1383
+1378
 483
 %FITTEDover80
 over80 / (\nMALEunder50 + FEMunder50 + MALE50to80 + FEM50to80 + MALEover80 + FEMover80)
@@ -1218,10 +1224,10 @@ TGTmale<50
 11
 
 MONITOR
-916
-486
-992
-531
+914
+491
+990
+536
 TGTmale>80
 1532990 / 58850717
 5
@@ -1229,10 +1235,10 @@ TGTmale>80
 11
 
 MONITOR
-829
-489
-908
-534
+832
+491
+911
+536
 TGTmale5080
 10962256 / 58850717
 5
@@ -1251,10 +1257,10 @@ TGTfem<50
 11
 
 MONITOR
-913
-534
-987
-579
+914
+538
+988
+583
 TGTfem>80
 2532337 / 58850717
 5
@@ -1262,9 +1268,9 @@ TGTfem>80
 11
 
 MONITOR
-829
+832
 536
-909
+912
 581
 TGTfem5080
 11924854 / 58850717
@@ -1367,8 +1373,7 @@ TEXTBOX
 ## WHAT IS IT?
 
 The model formalizes the Iterative Proportional Fitting (IPF), a technique used for synthetic reconstruction, used to derive the properties of agents from the known marginal distribution of a target population. 
-The model provides weights to adapt to an artificial population, so to be representative of the target population. In the specific case, the raw number for each category are reported.
-In the bottom right corner, results are converted into percentage for each joint category to approximate to the real population. The percentages can be used to initialize a synthetic population of any other size.
+The model provides weights to adapt to an artificial population, so to approximate to a target population. Marginal distributions can be inputed manually. However, the model includes data from ISTAT for validation. Data are gender and age distribution in Italy 2023: https://esploradati.istat.it/databrowser/#/it/dw/categories/IT1,POP,1.0/POP_POPULATION/DCIS_POPRES1/IT1,22_289_DF_DCIS_POPRES1_2,1.0
 
 ## LITERATURE CONTEXT
 
@@ -1386,19 +1391,17 @@ IPF is the archetypal technique in SR (Lovelace et al., 2015; Chapuis, Taillandi
 
 ## HOW IT WORKS
 
-IPF takes the data from a sample into a contingency table, the goal is to estimate weights for each cell (joint distribution) so that the fitted marginals computed become equivalent to the known marginals in the population. For each cell, the weight computed is the ratio of marginal distribution known in the population (target) by the fitted marginal distribution of the sample at each iteration. An iteration is the computation of weights by row (step 1, variable 1) and then columns (step 2, variable 2). The process is repeated a number of iterations until a benchmark is met. 
+IPF takes the data from a sample into a contingency table, the goal is to estimate weights for each cell (joint distribution) so that the fitted marginals computed become equivalent to the known marginals in the population. For each cell, the weight computed is the ratio of marginal distribution known in the population (target) divided by the fitted marginal distribution of the sample at each iteration. An iteration is the computation of weights by row (step 1, variable 1) and then columns (step 2, variable 2). The process is repeated a number of iterations until a benchmark is met. 
 
-Each cell at iteration 0 (i.e. the original sample) has weight 1 and equal weight 1.
+Each cell at iteration 0 (i.e. the original sample) has weight 1.
 
 TAE (Total Absolute Error) is one internal validation measure to the IPF algorithm. It is the absolute difference between known target marginal value and fitted marginal value. It should be close to zero, i.e. the values are similar.
 
-TGT_age, TGT_age, TGT_joint: empirical data that serve as target, both marginal and join distribution. Data are the age and gender of the Italian national population at 2023 retrieved at ISTAT, recoded separately (see R code): https://esploradati.istat.it/databrowser/#/it/dw/categories/IT1,POP,1.0/POP_POPULATION/DCIS_POPRES1/IT1,22_289_DF_DCIS_POPRES1_2,1.0 
-
-Marginal values in the TGT target boxes are already calibrated
-
 ## HOW TO USE IT
 
-For the sake of exposition, a scenario here is presented where 2 variables are taken into account (AGE and GENDER). A random sample is extracted that will be used for the initialization of a synthetic population. The observer can impose manually the marginal distributions of a hypothetical population to use as target. The goal of the model is to compute the weights of each category using IPF, so that the sample is representative of the population.
+For the sake of exposition, a scenario here is presented where 2 variables are taken into account (AGE and GENDER). An artificial population is extracted as sample, that will be used for the initialization of a synthetic population. The observer can impose manually the marginal distributions of a hypothetical population to use as target. The goal of the model is to compute the weights of each category using IPF, so that the sample is representative of the population.
+
+For the sake of validation at this step, the value of each cell of the artificial population is equal to 1. This is a credible assumption since we want to build an artificial population ex novo. 
 
 1) SAMPLE_EXTRACTION: set up a random sample
 2) Set manually the target marginal values of each variable in the population (blue boxes TGT). The sum of columns must be equal to the some of the rows!
@@ -1409,11 +1412,14 @@ Alternatively, the algorithm can be broken down manually running at each step fi
 ## THINGS TO NOTICE
 
 In the contingency table, the updated value of each cell (joint distribution) is displayed, multiplying the cell by its weight.
-In the output, the marginal fitted values at each iteration (using UPDATE_WEIGHTS)
+In the output, the marginal fitted values at each iteration (WHEN using automatic UPDATE_WEIGHTS)
 In the corner, the actual weights estimated at each step. 
-In the plots, the value of each joint category is updated: it serves to compare what initial distributions would be implemented based solely on data from the original sample and how they would change once weights are calibrated.
+In the plots, the proportion of each crossed category (cell) in the artificial population and the reference target from data ISTAT. 
+
+TGT_age, TGT_age, TGT_joint: empirical  ISTAT data that serve as target, both marginal and join distribution. They will appear in the observer slot.
 
 ## THINGS TO CORRECT /  NEXT STEPS
+
 
 * Used precision values with 5 decimals to avoid "integerization" (Lovelace et al., 2015): not having precise correspondence between fitted marginals and known marginals, so that the iteration would continues for extremely low values of TAE (truncation)
 
