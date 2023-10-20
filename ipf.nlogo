@@ -18,12 +18,12 @@ to sample_extraction
   clear-all
   reset-ticks
   ifelse seed_comparison? [random-seed 52682][]
-set MALEunder50init 1  ; initial values sample
-set FEMunder50init 1
-set MALE50to80init 1
-set FEM50to80init  1
-set MALEover80init  1
-set FEMover80init 1
+  set MALEunder50init ifelse-value setsample_1 [1][ random 1000]
+set FEMunder50init  ifelse-value setsample_1 [1][ random 1000]
+set MALE50to80init  ifelse-value setsample_1 [1][ random 1000]
+set FEM50to80init  ifelse-value setsample_1 [1][ random 1000]
+set MALEover80init  ifelse-value setsample_1 [1][ random 1000]
+set FEMover80init ifelse-value setsample_1 [1][ random 1000]
 
   set MALEunder50 MALEunder50init  ; Repeated just to keep record of initial values
 set FEMunder50 FEMunder50init
@@ -120,10 +120,10 @@ ticks
 30.0
 
 BUTTON
-57
-41
-184
-74
+176
+42
+277
+75
 sample_extraction
 sample_extraction\nsetup-plots
 NIL
@@ -1213,10 +1213,10 @@ fitted marginals
 1
 
 MONITOR
-747
-490
-827
-535
+828
+415
+908
+460
 TGTmale<50
 16254113 / 58850717
 5
@@ -1224,10 +1224,10 @@ TGTmale<50
 11
 
 MONITOR
-914
-491
-990
-536
+829
+509
+909
+554
 TGTmale>80
 1532990 / 58850717
 5
@@ -1235,10 +1235,10 @@ TGTmale>80
 11
 
 MONITOR
-832
-491
-911
-536
+830
+463
+909
+508
 TGTmale5080
 10962256 / 58850717
 5
@@ -1246,10 +1246,10 @@ TGTmale5080
 11
 
 MONITOR
-747
-537
-827
-582
+910
+415
+990
+460
 TGTfem<50
 15644167 / 58850717
 5
@@ -1257,10 +1257,10 @@ TGTfem<50
 11
 
 MONITOR
-914
-538
-988
-583
+913
+508
+992
+553
 TGTfem>80
 2532337 / 58850717
 5
@@ -1268,10 +1268,10 @@ TGTfem>80
 11
 
 MONITOR
-832
-536
-912
-581
+913
+461
+993
+506
 TGTfem5080
 11924854 / 58850717
 5
@@ -1279,20 +1279,20 @@ TGTfem5080
 11
 
 TEXTBOX
-780
-471
-930
-489
+835
+398
+985
+416
 % joint category target ISTAT
 10
 0.0
 1
 
 BUTTON
-742
-431
-825
-464
+733
+437
+812
+470
 TGT_joint
 set TGTjoinISTAT csv:from-file \"C:/Users/rocpa/OneDrive/Desktop/ROME_CNR/WP5/dfcrossed_istat.csv\"\nshow TGTjoinISTAT
 NIL
@@ -1306,10 +1306,10 @@ NIL
 1
 
 BUTTON
-827
-431
-908
-464
+732
+472
+813
+505
 TGT_age
 set TGTageISTAT csv:from-file \"C:/Users/rocpa/OneDrive/Desktop/ROME_CNR/WP5/dfage_istat.csv\"\nshow TGTageISTAT
 NIL
@@ -1323,10 +1323,10 @@ NIL
 1
 
 BUTTON
-911
-432
-991
-465
+732
+508
+812
+541
 TGT_gen
 set TGTgenderISTAT csv:from-file \"C:/Users/rocpa/OneDrive/Desktop/ROME_CNR/WP5/dfgen_istat.csv\"\nshow TGTgenderISTAT
 NIL
@@ -1340,31 +1340,52 @@ NIL
 1
 
 TEXTBOX
-727
-410
-1027
-428
+720
+377
+1020
+395
 --------------------------TGT ISTAT data -----------------------
 10
 0.0
 1
 
 TEXTBOX
-720
-420
-735
-576
+713
+387
+728
+543
 |\n|\n|\n|\n|\n|\n|\n|\n|\n|\n|\n|\n
 10
 0.0
 1
 
 TEXTBOX
-1005
-418
-1020
-574
+998
+385
+1013
+541
 |\n|\n|\n|\n|\n|\n|\n|\n|\n|\n|\n|\n
+10
+0.0
+1
+
+SWITCH
+54
+42
+174
+75
+setsample_1
+setsample_1
+1
+1
+-1000
+
+TEXTBOX
+745
+400
+809
+426
+target aggregated
 10
 0.0
 1
@@ -1372,12 +1393,12 @@ TEXTBOX
 @#$#@#$#@
 ## WHAT IS IT?
 
-The model formalizes the Iterative Proportional Fitting (IPF), a technique used for synthetic reconstruction, used to derive the properties of agents from the known marginal distribution of a target population. 
-The model provides weights to adapt to an artificial population, so to approximate to a target population. Marginal distributions can be inputed manually. However, the model includes data from ISTAT for validation. Data are gender and age distribution in Italy 2023: https://esploradati.istat.it/databrowser/#/it/dw/categories/IT1,POP,1.0/POP_POPULATION/DCIS_POPRES1/IT1,22_289_DF_DCIS_POPRES1_2,1.0
+The model implements the Iterative Proportional Fitting (IPF), a technique used for synthetic reconstruction, used to derive the properties of agents from the known marginal distribution of a target population. The technique is the equivalent to raking in statistics.
+The model provides weights to approximate the unknown joint distribution of a target population. For the sake of validation, data are drawn from the ISTAT data of gender  and age distributioon in Italy in 2023: https://esploradati.istat.it/databrowser/#/it/dw/categories/IT1,POP,1.0/POP_POPULATION/DCIS_POPRES1/IT1,22_289_DF_DCIS_POPRES1_2,1.0
 
 ## LITERATURE CONTEXT
 
-Synthetic populations aim at integrating various database sources to build architectures as much realistic to a target population (Adiga et al., 2015; review by Chapuis, Taillandier & Drogoul, 2022). The challenge is to integrate multiple characteristics of the agents and reproduce the joint distributions of such characteristics in the target population of interest. Yameogo et al. (2021) identify 3 main categories of techniques that address the issue: 
+Synthetic populations aim at integrating various database sources to build architectures as much as realistic to a target population (Adiga et al., 2015; review by Chapuis, Taillandier & Drogoul, 2022). The challenge is to integrate multiple characteristics of the agents and reproduce the joint distributions of such characteristics in the target population of interest. Yameogo et al. (2021) identify 3 main categories of techniques that address the issue: 
 
 - COMBINATORIAL OPTIMIZATION (CO): used when the joint distributions are known and can be directly implemented, scaling the target population to the synthetic society
 - SYNTHETIC RECONSTRUCTION (SR): used when the joint distributions are not known, but the marginal distributions in the population are known. The goal of the technique is to estimate weights for each category of artificial agents' joint attributes from the marginal distribution of the population.
@@ -1391,7 +1412,7 @@ IPF is the archetypal technique in SR (Lovelace et al., 2015; Chapuis, Taillandi
 
 ## HOW IT WORKS
 
-IPF takes the data from a sample into a contingency table, the goal is to estimate weights for each cell (joint distribution) so that the fitted marginals computed become equivalent to the known marginals in the population. For each cell, the weight computed is the ratio of marginal distribution known in the population (target) divided by the fitted marginal distribution of the sample at each iteration. An iteration is the computation of weights by row (step 1, variable 1) and then columns (step 2, variable 2). The process is repeated a number of iterations until a benchmark is met. 
+IPF takes the data from a sample into a contingency table, the goal is to estimate weights for each cell value (joint distribution) so that the fitted marginals computed become equivalent to the known marginals in the population. For each cell, the weight computed is the ratio of marginal distribution known in the population (target) divided by the fitted marginal distribution of the sample at each iteration. An iteration is the computation of weights by row (step 1, variable 1) and then columns (step 2, variable 2). The process is repeated a number of iterations until a benchmark is met. 
 
 Each cell at iteration 0 (i.e. the original sample) has weight 1.
 
@@ -1399,37 +1420,39 @@ TAE (Total Absolute Error) is one internal validation measure to the IPF algorit
 
 ## HOW TO USE IT
 
-For the sake of exposition, a scenario here is presented where 2 variables are taken into account (AGE and GENDER). An artificial population is extracted as sample, that will be used for the initialization of a synthetic population. The observer can impose manually the marginal distributions of a hypothetical population to use as target. The goal of the model is to compute the weights of each category using IPF, so that the sample is representative of the population.
+For the sake of exposition, a scenario here is presented where 2 variables are taken into account (AGE and GENDER). An artificial population is extracted as sample, that will be used for the initialization of a synthetic population. The target data TGT are calibrated on the ISTAT data, though it is possible to impute data manually (the sum of columns must be equl to the sum of rows!).
 
-For the sake of validation at this step, the value of each cell of the artificial population is equal to 1. This is a credible assumption since we want to build an artificial population ex novo. 
 
-1) SAMPLE_EXTRACTION: set up a random sample
-2) Set manually the target marginal values of each variable in the population (blue boxes TGT). The sum of columns must be equal to the some of the rows!
-3) UPDATE_WEIGHTS: to run the IPF
+1) setsample_1: ON, each crosscategory has equal value 1; OFF, each crosscategory is drawn from a random distribution between 0 and 1000
+2) UPDATE_WEIGHTS: to run the IPF
+
+The computation stops when TAE is 0.
 
 Alternatively, the algorithm can be broken down manually running at each step first by rows (FITTING_ROWS button) and then by columns (FITTING_COLUMNS button). The chooser SEED_COMPARISON is to set a seed in the code to have same conditions to compare between FITTING_ROWS+COLUMN_ROWS and UPDATE_WEIGHTS
 
 ## THINGS TO NOTICE
 
-In the contingency table, the updated value of each cell (joint distribution) is displayed, multiplying the cell by its weight.
-In the output, the marginal fitted values at each iteration (WHEN using automatic UPDATE_WEIGHTS)
+In the contingency table, the updated value of each cell (joint distribution) is displayed, multiplying the cell value by its weight.
+In the output, the marginal fitted values at each iteration.
 In the corner, the actual weights estimated at each step. 
 In the plots, the proportion of each crossed category (cell) in the artificial population and the reference target from data ISTAT. 
 
-TGT_age, TGT_age, TGT_joint: empirical  ISTAT data that serve as target, both marginal and join distribution. They will appear in the observer slot.
+TGT_age, TGT_age, TGT_joint: empirical  ISTAT data that serve as target, both marginal and join distribution for validation. They will appear in the observer slot.
 
 ## THINGS TO CORRECT /  NEXT STEPS
 
 
-* Used precision values with 5 decimals to avoid "integerization" (Lovelace et al., 2015): not having precise correspondence between fitted marginals and known marginals, so that the iteration would continues for extremely low values of TAE (truncation)
+* Used precision values with 5 decimals to avoid "integerization" (Lovelace et al., 2015): not having precise correspondence between fitted marginals and known marginals, so that the iteration would continues for extremely low values of TAE (truncation).
+
+* For very unbalanced sample, mismatch between fitted computed value and empirical value is higher
 
 * Allocating (Yamaego et al, 2021), connected to integerization: the values obtained have decimals, which might be nonsense in some cases with initialization (e.g. the category has 0.6 agents). They can be rounded then.
 
 * Limits of IPF (next steps, what is new): 
 	- enable the simulation to be used for nested data: the IPF uses one layer of population, generally individuals. This is addressed as two-layered population issue, e.g. combining data on individuals (level 1) and households (level 2), not knowing the actual intersection between the levels. A general trend is to run IPF for the two layers independently, or compute probabilities for one layer knowing the characteristics of the other (see Gargiulo et al., 2010, modeling individuals from known distributions of households). More recently, the Hierarchical Iterative Proportional Fitting has been developed to treat jointly the two layers (Yamaeogo et al 2021, Müller & Axhausen (2011) for a first implementation)
-	- "curse of multidimensionality" (mention in Chapuis et al., 2022): IPF uses two variables at the time, which is not the case with multiple source of data and research infrastructure. The model should be able to reproduce as many joint characteristics as possible. An alternative might be to repeat IPF for each combination 2x2 of variables,  and then reiterate until weights fit each possible combination, but this is slow and  unpracticable. I want to see if others have addressed this. Farooq et al (2013) should have addressed it, taking Markov Chain Monte Carlo (MCMC) as alternative to IPF to address multiple dimensions at the time. I have to study this.
+	- "curse of multidimensionality" (mention in Chapuis et al., 2022): IPF uses two variables at the time, which is not the case with multiple source of data and research infrastructure. The model should be able to reproduce as many joint characteristics as possible. An alternative might be to repeat IPF for each combination 2x2 of variables,  and then reiterate until weights fit each possible combination, but this is slow and  unpracticable. I want to see if others have addressed this. Farooq et al (2013) address it with Markov Chain Monte Carlo (MCMC) as alternative to IPF to address multiple dimensions at the time. I have to study this.
 	- initialize with real data, ideally CESSDA,RISIS,SHARE, both to test and to address data incongruity and automated techniques (Chapuis et al. 2022): variables are at different scales (e.g. age continuous, gender binary), incompleteness (a level of variable in the sample or in the population is missing, so the marginal sum is equal to 0 and IPF cannot be run). An overview of techniques and how to implement automatically in the initialization of abm.
-	- recommendation to look at SHARE, think of it web-based (FP)
+	- REST-API to link with data server where multidimensional data are stored and  can be initialized in the moodel, with
 
 ## REFERENCES
 
