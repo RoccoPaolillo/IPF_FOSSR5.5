@@ -16,7 +16,7 @@ globals[
 
 to sample_extraction
   clear-all
-  reset-ticks
+
   ifelse seed_comparison? [random-seed 52682][]
   set MALEunder50init ifelse-value setsample_1 [1][ random 1000]
 set FEMunder50init  ifelse-value setsample_1 [1][ random 1000]
@@ -33,6 +33,9 @@ set MALEover80 MALEover80init
 set FEMover80  FEMover80init
 
 sumFITmarginals
+
+reset-ticks
+
 end
 
 to update_weights
@@ -43,7 +46,7 @@ fitting_rows           ; the algorithm of IPF: until TAE is 0, the weights are c
  output-print  word "under50: " under50 output-print word "from50to80: " from50to80 output-print word "over80: " over80 ; to report the values in each iteration (after columns also updated)
   output-print word "male: " male output-print word "female: " female output-print "iteration completed----\\"
   ]]
-  update-plots
+
 end
 
 
@@ -83,7 +86,7 @@ set under50  precision  (MALEunder50 + FEMunder50) 5
   set female precision (FEMunder50 + FEM50to80 + FEMover80) 5
   set TAE abs((TGTunder50 - under50) + (TGT50to80 - from50to80) + (TGTover80 - over80) + (TGTmale - male) + (TGTfemale - female))
 
-set w_MALEunder50 (MALEunder50 / MALEunder50init) ; update weights
+set w_MALEunder50 (MALEunder50 / MALEunder50init) ; extract weights
 set w_FEMunder50 (FEMunder50 / FEMunder50init)
 set w_MALE50to80 (MALE50to80 / MALE50to80init)
 set w_FEM50to80 (FEM50to80 / FEM50to80init)
@@ -560,11 +563,11 @@ seed_comparison?
 -1000
 
 PLOT
-985
-11
-1148
-131
-NIL
+953
+10
+1147
+154
+MALE<50
 NIL
 NIL
 0.0
@@ -575,15 +578,15 @@ true
 true
 "" ""
 PENS
-"fitted" 1.0 1 -16777216 true "plot MALEunder50 / (male + female)" "plot MALEunder50 / (male + female)"
+"fiited" 1.0 1 -16777216 true "" "plot MALEunder50 / (male + female)"
 "ISTAT" 1.0 1 -2674135 true "" "plot 16254113 / 58850717"
 
 PLOT
-985
-137
-1150
-257
-NIL
+953
+163
+1141
+308
+FEM<50
 NIL
 NIL
 0.0
@@ -594,15 +597,15 @@ true
 true
 "" ""
 PENS
-"fitted" 1.0 1 -16777216 true "plot FEMunder50 / (male + female)" "plot FEMunder50 / (male + female)"
+"fitted" 1.0 1 -16777216 true "" "plot FEMunder50 / (male + female)"
 "ISTAT" 1.0 1 -2674135 true "" "plot 15644167 / 58850717"
 
 PLOT
-1155
-12
-1317
-132
-NIL
+1147
+11
+1323
+154
+MALE50to80
 NIL
 NIL
 0.0
@@ -613,15 +616,15 @@ true
 true
 "" ""
 PENS
-"fitted" 1.0 1 -16777216 true "plot MALE50to80 / (male + female)" "plot MALE50to80 / (male + female)"
+"fitted" 1.0 1 -16777216 true "" "plot MALE50to80 / (male + female)"
 "ISTAT" 1.0 1 -2674135 true "" "plot 10962256 / 58850717"
 
 PLOT
-1156
-135
-1323
-256
-NIL
+1142
+162
+1327
+308
+FEM50to80
 NIL
 NIL
 0.0
@@ -632,15 +635,15 @@ true
 true
 "" ""
 PENS
-"fitted" 1.0 1 -16777216 true "plot FEM50to80 / (male + female)" "plot FEM50to80 / (male + female)"
+"fitted" 1.0 1 -16777216 true "" "plot FEM50to80 / (male + female)"
 "ISTAT" 1.0 1 -2674135 true "" "plot 11924854 / 58850717"
 
 PLOT
-1327
+1323
 10
-1492
-130
-NIL
+1498
+155
+MALE>80
 NIL
 NIL
 0.0
@@ -651,15 +654,15 @@ true
 true
 "" ""
 PENS
-"fitted" 1.0 1 -16777216 true "plot MALEover80 / (male + female)" "plot MALEover80 / (male + female)"
+"fitted" 1.0 1 -16777216 true "" "plot MALEover80 / (male + female)"
 "ISTAT" 1.0 1 -2674135 true "" "plot 1532990 / 58850717"
 
 PLOT
-1328
-138
-1493
-258
-NIL
+1327
+162
+1497
+307
+FEM>80
 NIL
 NIL
 0.0
@@ -670,7 +673,7 @@ true
 true
 "" ""
 PENS
-"fitted" 1.0 1 -16777216 true "plot FEMover80 / (male + female)" "plot FEMover80 / (male + female)"
+"fitted" 1.0 1 -16777216 true "" "plot FEMover80 / (male + female)"
 "ISTAT" 1.0 1 -2674135 true "" "plot 2532337 / 58850717"
 
 TEXTBOX
@@ -824,16 +827,16 @@ TEXTBOX
 1
 
 OUTPUT
-756
+739
 29
-966
+949
 377
 10
 
 TEXTBOX
-814
+797
 10
-964
+947
 28
 Update iterations
 12
@@ -892,9 +895,9 @@ TEXTBOX
 
 MONITOR
 1078
-83
+109
 1148
-128
+154
 %MALE<50
 MALEunder50 / (male + female)
 5
@@ -902,10 +905,10 @@ MALEunder50 / (male + female)
 11
 
 MONITOR
-1085
-212
-1150
-257
+1077
+263
+1141
+308
 %FEM<50
 FEMunder50 / (male + female)
 5
@@ -913,10 +916,10 @@ FEMunder50 / (male + female)
 11
 
 MONITOR
-1235
-87
-1320
-132
+1239
+109
+1324
+154
 %MALE50to80
 MALE50to80 / (male + female)
 5
@@ -924,10 +927,10 @@ MALE50to80 / (male + female)
 11
 
 MONITOR
-1244
-213
-1323
-258
+1247
+261
+1326
+306
 %FEM50to80
 FEM50to80 / (male + female)
 5
@@ -935,10 +938,10 @@ FEM50to80 / (male + female)
 11
 
 MONITOR
-1424
-87
-1493
-132
+1427
+111
+1496
+156
 %MALE>80
 MALEover80 / (male + female)
 5
@@ -946,10 +949,10 @@ MALEover80 / (male + female)
 11
 
 MONITOR
-1432
-215
-1495
-260
+1436
+261
+1499
+306
 %FEM>80
 FEMover80 / (male + female)
 5
@@ -1213,10 +1216,10 @@ fitted marginals
 1
 
 MONITOR
-828
-415
-908
-460
+826
+421
+906
+466
 TGTmale<50
 16254113 / 58850717
 5
@@ -1224,10 +1227,10 @@ TGTmale<50
 11
 
 MONITOR
-829
-509
-909
-554
+827
+515
+907
+560
 TGTmale>80
 1532990 / 58850717
 5
@@ -1235,10 +1238,10 @@ TGTmale>80
 11
 
 MONITOR
-830
-463
-909
-508
+828
+469
+907
+514
 TGTmale5080
 10962256 / 58850717
 5
@@ -1246,10 +1249,10 @@ TGTmale5080
 11
 
 MONITOR
-910
-415
-990
-460
+908
+421
+988
+466
 TGTfem<50
 15644167 / 58850717
 5
@@ -1257,10 +1260,10 @@ TGTfem<50
 11
 
 MONITOR
-913
-508
-992
-553
+911
+514
+990
+559
 TGTfem>80
 2532337 / 58850717
 5
@@ -1268,10 +1271,10 @@ TGTfem>80
 11
 
 MONITOR
-913
-461
-993
-506
+911
+467
+991
+512
 TGTfem5080
 11924854 / 58850717
 5
@@ -1279,20 +1282,20 @@ TGTfem5080
 11
 
 TEXTBOX
-835
-398
-985
-416
+833
+404
+983
+422
 % joint category target ISTAT
 10
 0.0
 1
 
 BUTTON
-733
-437
-812
-470
+731
+443
+810
+476
 TGT_joint
 set TGTjoinISTAT csv:from-file \"C:/Users/rocpa/OneDrive/Desktop/ROME_CNR/WP5/dfcrossed_istat.csv\"\nshow TGTjoinISTAT
 NIL
@@ -1306,10 +1309,10 @@ NIL
 1
 
 BUTTON
-732
-472
-813
-505
+730
+478
+811
+511
 TGT_age
 set TGTageISTAT csv:from-file \"C:/Users/rocpa/OneDrive/Desktop/ROME_CNR/WP5/dfage_istat.csv\"\nshow TGTageISTAT
 NIL
@@ -1323,10 +1326,10 @@ NIL
 1
 
 BUTTON
-732
-508
-812
-541
+730
+514
+810
+547
 TGT_gen
 set TGTgenderISTAT csv:from-file \"C:/Users/rocpa/OneDrive/Desktop/ROME_CNR/WP5/dfgen_istat.csv\"\nshow TGTgenderISTAT
 NIL
@@ -1340,10 +1343,10 @@ NIL
 1
 
 TEXTBOX
-720
-377
-1020
-395
+718
+383
+1018
+401
 --------------------------TGT ISTAT data -----------------------
 10
 0.0
@@ -1381,10 +1384,10 @@ setsample_1
 -1000
 
 TEXTBOX
-745
-400
-809
-426
+743
+406
+807
+432
 target aggregated
 10
 0.0
@@ -1451,7 +1454,7 @@ TGT_age, TGT_age, TGT_joint: empirical  ISTAT data that serve as target, both ma
 * Limits of IPF (next steps, what is new): 
 	- enable the simulation to be used for nested data: the IPF uses one layer of population, generally individuals. This is addressed as two-layered population issue, e.g. combining data on individuals (level 1) and households (level 2), not knowing the actual intersection between the levels. A general trend is to run IPF for the two layers independently, or compute probabilities for one layer knowing the characteristics of the other (see Gargiulo et al., 2010, modeling individuals from known distributions of households). More recently, the Hierarchical Iterative Proportional Fitting has been developed to treat jointly the two layers (Yamaeogo et al 2021, Müller & Axhausen (2011) for a first implementation)
 	- "curse of multidimensionality" (mention in Chapuis et al., 2022): IPF uses two variables at the time, which is not the case with multiple source of data and research infrastructure. The model should be able to reproduce as many joint characteristics as possible. An alternative might be to repeat IPF for each combination 2x2 of variables,  and then reiterate until weights fit each possible combination, but this is slow and  unpracticable. I want to see if others have addressed this. Farooq et al (2013) address it with Markov Chain Monte Carlo (MCMC) as alternative to IPF to address multiple dimensions at the time. I have to study this.
-	- initialize with real data, ideally CESSDA,RISIS,SHARE, both to test and to address data incongruity and automated techniques (Chapuis et al. 2022): variables are at different scales (e.g. age continuous, gender binary), incompleteness (a level of variable in the sample or in the population is missing, so the marginal sum is equal to 0 and IPF cannot be run). An overview of techniques and how to implement automatically in the initialization of abm.
+	- initialize with other data, ideally CESSDA,RISIS,SHARE, both to test and to address data incongruity and automated techniques (Chapuis et al. 2022): variables are at different scales (e.g. age continuous, gender binary), incompleteness (a level of variable in the sample or in the population is missing, so the marginal sum is equal to 0 and IPF cannot be run). An overview of techniques and how to implement automatically in the initialization of abm.
 	- REST-API to link with data server where multidimensional data are stored and  can be initialized in the moodel, with
 
 ## REFERENCES
