@@ -1,5 +1,8 @@
 extensions [csv]
 globals[
+  df
+  maledf
+  femaledf
   MALEunder50init FEMunder50init MALE50to80init FEM50to80init MALEover80init FEMover80init ; initial random values of sample
   MALEunder50 FEMunder50 MALE50to80 FEM50to80 MALEover80 FEMover80              ; fitted values of sample. Repeated just to keep record of initial values
   w_MALEunder50 w_FEMunder50 w_MALE50to80 w_FEM50to80 w_MALEover80 w_FEMover80  ; weights for each category
@@ -16,6 +19,19 @@ globals[
 
 to sample_extraction
   clear-all
+
+  clear-all
+
+  set df  csv:from-file "C:/Users/rocpa/OneDrive/Desktop/ROME_CNR/WP5/WP5_FOSSR-main/WP5_FOSSR-main/original_dataset2023agegen.csv"
+  set df filter [i -> item 3 i = "Italia" and item 7 i != "Totale" and item 8 i != "TOTAL"  ] df
+  set maledf filter [i -> item 7 i = "Maschi" ] df
+  set femaledf filter [i -> item 7 i = "Femmine" ] df
+  set TGTmale sum map [x ->  item 13 x ] maledf
+  set TGTfemale sum map [x ->  item 13 x ] femaledf
+  set TGTunder50 (sum map [x ->  item 13 x ] sublist maledf 0 51 + sum map [x ->  item 13 x ] sublist femaledf 0 51)
+  set TGT50to80 (sum map [x ->  item 13 x ] sublist maledf 51 81 + sum map [x ->  item 13 x ] sublist femaledf 51 81)
+  set TGTover80 (sum map [x ->  item 13 x ] sublist maledf 81 101 + sum map [x ->  item 13 x ] sublist femaledf 81 101)
+
 
   ifelse seed_comparison? [random-seed 52682][]
   set MALEunder50init ifelse-value setsample_1 [1][ random 1000]
