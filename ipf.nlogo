@@ -59,8 +59,18 @@ to update_weights
 repeat 1 [
 fitting_rows           ; the algorithm of IPF: until TAE is 0, the weights are calibrated for each iteration. Each iteration includes update by row and update by column
  fitting_columns
- output-print  word "under50: " under50 output-print word "from50to80: " from50to80 output-print word "over80: " over80 ; to report the values in each iteration (after columns also updated)
-  output-print word "male: " male output-print word "female: " female output-print "iteration completed----\\"
+; output-print  word "under50: " under50 output-print word "from50to80: " from50to80 output-print word "over80: " over80 ; to report the values in each iteration (after columns also updated)
+;  output-print word "male: " male output-print word "female: " female output-print word "maleleq50: "
+  output-print  word "maleleq50 "   (MALEunder50 / (male + female))
+  output-print  word "femleq50 "   (FEMunder50 / (male + female))
+  output-print  word "male50to80 "      (MALE50to80 / (male + female))
+  output-print  word "fem50to80 "  (FEM50to80 / (male + female))
+  output-print  word "maleover80 "   (MALEover80 / (male + female))
+  output-print  word "femover80 "   (FEMover80 / (male + female))
+
+
+ ;     output-print "iteration completed----\\"
+
   ]]
 
 end
@@ -95,11 +105,11 @@ to fitting_columns
 end
 
 to sumFITmarginals
-set under50  precision  (MALEunder50 + FEMunder50) 5
-  set from50to80 precision (MALE50to80 + FEM50to80) 5
-  set over80 precision ( MALEover80 +  FEMover80) 5
-  set male precision (MALEunder50 + MALE50to80 +  MALEover80) 5
-  set female precision (FEMunder50 + FEM50to80 + FEMover80) 5
+set under50    (MALEunder50 + FEMunder50) ; precision 5
+  set from50to80  (MALE50to80 + FEM50to80)
+  set over80  ( MALEover80 +  FEMover80)
+  set male  (MALEunder50 + MALE50to80 +  MALEover80)
+  set female  (FEMunder50 + FEM50to80 + FEMover80)
   set TAE abs((TGTunder50 - under50) + (TGT50to80 - from50to80) + (TGTover80 - over80) + (TGTmale - male) + (TGTfemale - female))
 
 set w_MALEunder50 (MALEunder50 / MALEunder50init) ; extract weights
@@ -108,6 +118,7 @@ set w_MALE50to80 (MALE50to80 / MALE50to80init)
 set w_FEM50to80 (FEM50to80 / FEM50to80init)
 set w_MALEover80 (MALEover80 / MALEover80init)
 set w_FEMover80 (FEMover80 / FEMover80init)
+
 
   end
 @#$#@#$#@
@@ -399,7 +410,7 @@ TAE
 BUTTON
 490
 515
-604
+587
 548
 update_weights
 update_weights
@@ -1395,7 +1406,7 @@ SWITCH
 75
 setsample_1
 setsample_1
-1
+0
 1
 -1000
 
@@ -1407,6 +1418,23 @@ TEXTBOX
 target aggregated
 10
 0.0
+1
+
+BUTTON
+593
+516
+672
+549
+print_txt
+export-output \"prctg_fitted.txt\"
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
 1
 
 @#$#@#$#@
@@ -1456,12 +1484,10 @@ In the output, the marginal fitted values at each iteration.
 In the corner, the actual weights estimated at each step. 
 In the plots, the proportion of each crossed category (cell) in the artificial population and the reference target from data ISTAT. 
 
-TGT_age, TGT_age, TGT_joint: empirical  ISTAT data that serve as target, both marginal and join distribution for validation. They will appear in the observer slot.
+Crossed fitted value appear in the output box and can be print out as text file with button PRINT_TXT
 
 ## THINGS TO CORRECT /  NEXT STEPS
 
-
-* Used precision values with 5 decimals to avoid "integerization" (Lovelace et al., 2015): not having precise correspondence between fitted marginals and known marginals, so that the iteration would continues for extremely low values of TAE (truncation).
 
 * For very unbalanced sample, mismatch between fitted computed value and empirical value is higher
 
