@@ -14,7 +14,7 @@ import os
 # upload csv dataframe #####
 
 # to import csv
-df = pd.read_csv('C:/Users/rocpa/OneDrive/Desktop/ROME_CNR/WP5/WP5_FOSSR-main/WP5_FOSSR-main/original_dataset2023agegen.csv',
+df = pd.read_csv('C:/Users/rocpa/OneDrive/Documenti/GitHub/WP5_FOSSR/original_dataset2023agegen.csv',
                  header=None, delimiter = ",")
 array = df.to_numpy()    
 
@@ -176,5 +176,5 @@ Tp.sum()
 
 #  output csv (names columns and rows not appearing, to adjust format encoding in excel)
 
-os.chdir('C:/Users/rocpa/OneDrive/Desktop/ROME_CNR/WP5/WP5_FOSSR-main/WP5_FOSSR-main/')
+os.chdir('C:/Users/rocpa/OneDrive/Documenti/GitHub/WP5_FOSSR/')
 Fpdf.to_csv('percent_fitted.csv',sep = ",")
