@@ -22,11 +22,11 @@ to sample_extraction
 
   clear-all
 
-  set df  csv:from-file "C:/Users/rocpa/OneDrive/Desktop/ROME_CNR/WP5/WP5_FOSSR-main/WP5_FOSSR-main/original_dataset2023agegen.csv"
-  set df filter [i -> item 3 i = "Italia" and item 7 i != "Totale" and item 8 i != "TOTAL"  ] df
-  set maledf filter [i -> item 7 i = "Maschi" ] df
+  set df  csv:from-file "original_dataset2023agegen.csv" ; dataset csv to upload
+  set df filter [i -> item 3 i = "Italia" and item 7 i != "Totale" and item 8 i != "TOTAL"  ] df   ; selection data
+  set maledf filter [i -> item 7 i = "Maschi" ] df        ; filtering data by gender
   set femaledf filter [i -> item 7 i = "Femmine" ] df
-  set TGTmale sum map [x ->  item 13 x ] maledf
+  set TGTmale sum map [x ->  item 13 x ] maledf  ; set the target marginals
   set TGTfemale sum map [x ->  item 13 x ] femaledf
   set TGTunder50 (sum map [x ->  item 13 x ] sublist maledf 0 51 + sum map [x ->  item 13 x ] sublist femaledf 0 51)
   set TGT50to80 (sum map [x ->  item 13 x ] sublist maledf 51 81 + sum map [x ->  item 13 x ] sublist femaledf 51 81)
@@ -232,10 +232,10 @@ AGE
 1
 
 TEXTBOX
-473
-453
-535
-471
+469
+443
+531
+461
 GENDER
 13
 0.0
@@ -408,10 +408,10 @@ TAE
 11
 
 BUTTON
-490
-515
-587
-548
+483
+488
+580
+521
 update_weights
 update_weights
 NIL
@@ -724,10 +724,10 @@ Original sample
 1
 
 TEXTBOX
-387
-518
-482
-547
+380
+491
+475
+520
 COMPILE IPF\nuntil convergence
 12
 0.0
@@ -911,10 +911,10 @@ TEXTBOX
 1
 
 TEXTBOX
-484
-477
-529
-506
+483
+457
+528
+486
 ▼
 24
 0.0
@@ -1421,10 +1421,10 @@ target aggregated
 1
 
 BUTTON
-593
-516
-672
-549
+586
+489
+665
+522
 print_txt
 export-output \"prctg_fitted.txt\"
 NIL
@@ -1471,7 +1471,9 @@ For the sake of exposition, a scenario here is presented where 2 variables are t
 
 
 1) setsample_1: ON, each crosscategory has equal value 1; OFF, each crosscategory is drawn from a random distribution between 0 and 1000
-2) UPDATE_WEIGHTS: to run the IPF
+2) sample_extraction: by default, it uploads the csv dataset. Otherwise marginals TGT can be inputed manually
+3) UPDATE_WEIGHTS: to run the IPF
+4) print_txt: to obtain the computed crossed percentage as txt file
 
 The computation stops when TAE is 0.
 
