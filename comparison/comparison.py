@@ -13,28 +13,28 @@ barWidth = 0.25
 fig = plt.subplots(figsize =(12, 8)) 
  
 # set height of bar 
-IT = [12, 30, 1, 8, 22] 
-ECE = [28, 6, 16, 5, 10] 
-CSE = [29, 3, 24, 25, 17] 
+target = [0.2762, 0.2658, 0.1863, 0.2026, 0.0260,0.0430] 
+python = [0.2648, 0.2772, 0.1900, 0.1989, 0.0337,0.0353] 
+netlogo = [0.2648, 0.2772, 0.1900, 0.1989, 0.0337,0.0353] 
  
 # Set position of bar on X axis 
-br1 = np.arange(len(IT)) 
+br1 = np.arange(len(target)) 
 br2 = [x + barWidth for x in br1] 
 br3 = [x + barWidth for x in br2] 
  
 # Make the plot
-plt.bar(br1, IT, color ='r', width = barWidth, 
-        edgecolor ='grey', label ='IT') 
-plt.bar(br2, ECE, color ='g', width = barWidth, 
-        edgecolor ='grey', label ='ECE') 
-plt.bar(br3, CSE, color ='b', width = barWidth, 
-        edgecolor ='grey', label ='CSE') 
+plt.bar(br1, target, color ='r', width = barWidth, 
+        edgecolor ='grey', label ='Target') 
+plt.bar(br2, python, color ='g', width = barWidth, 
+        edgecolor ='grey', label ='fitted\nPython') 
+plt.bar(br3, netlogo, color ='b', width = barWidth, 
+        edgecolor ='grey', label ='fitted\nNetLogo') 
  
 # Adding Xticks 
-plt.xlabel('Branch', fontweight ='bold', fontsize = 15) 
-plt.ylabel('Students passed', fontweight ='bold', fontsize = 15) 
-plt.xticks([r + barWidth for r in range(len(IT))], 
-        ['2015', '2016', '2017', '2018', '2019'])
+plt.xlabel('Crosscategories', fontweight ='bold', fontsize = 15) 
+plt.ylabel('Percentage', fontweight ='bold', fontsize = 15) 
+plt.xticks([r + barWidth for r in range(len(target))], 
+        ['male<=50', 'female<=50', 'male51<=80', 'female51<=80', 'male>80', 'female>80'])
  
 plt.legend()
 plt.show() 
