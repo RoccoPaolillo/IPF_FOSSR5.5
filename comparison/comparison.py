@@ -24,7 +24,7 @@ br3 = [x + barWidth for x in br2]
  
 # Make the plot
 plt.bar(br1, target, color ='r', width = barWidth, 
-        edgecolor ='grey', label ='Target') 
+        edgecolor ='grey', label ='Target\nIstat 2022') 
 plt.bar(br2, python, color ='g', width = barWidth, 
         edgecolor ='grey', label ='fitted\nPython') 
 plt.bar(br3, netlogo, color ='b', width = barWidth, 
@@ -34,7 +34,7 @@ plt.bar(br3, netlogo, color ='b', width = barWidth,
 plt.xlabel('Crosscategories', fontweight ='bold', fontsize = 15) 
 plt.ylabel('Percentage', fontweight ='bold', fontsize = 15) 
 plt.xticks([r + barWidth for r in range(len(target))], 
-        ['male<=50', 'female<=50', 'male51<=80', 'female51<=80', 'male>80', 'female>80'])
+        ['male<=50', 'female<=50', 'male51<=80', 'female51<=80', 'male=>81', 'female=>81'])
  
 plt.legend()
 plt.show() 
