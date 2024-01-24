@@ -14,7 +14,9 @@ import os
 # upload csv dataframe #####
 
 # to import csv
-df = pd.read_csv('C:/Users/rocpa/OneDrive/Documenti/GitHub/WP5_FOSSR/original_dataset2023agegen.csv',
+wd = 'C:/Users/rocpa/OneDrive/Desktop/ROME_CNR/WP5/IPF_FOSSR5.5-main/IPF_FOSSR5.5-main/'
+os.chdir(wd)
+df = pd.read_csv("original_dataset2023agegen.csv",
                  header=None, delimiter = ",")
 array = df.to_numpy()    
 
@@ -79,7 +81,6 @@ array_m[81:101,:]
 filter_arrf = []
 
 for element in array[:,0]:
-  # if the element is higher than 42, set the value to True, otherwise False:
   if element == 'Femmine':
     filter_arrf.append(True)
   else:
@@ -119,14 +120,15 @@ u = np.array([TGTunder50, TGT51to80, TGTover80]) # row target (age)
 v = np.array([TGTmale, TGTfemale]) # col target (gender)
 
 
-# ipf algorithm
+# IPF algorithm
 # run by row first then column
+
 def ipf_update(M, u, v):
-    r_sums = M.sum(axis=1)
+    r_sums = M.sum(axis=1) # axis 1 and shape 1 = columns. Sum on axis 1 is equal to sum of elements of the row
     N = np.array([[M[r,c] * u[r] / r_sums[r] for c in range(M.shape[1])]
                   for r in range(M.shape[0])])
 
-    c_sums = N.sum(axis=0)
+    c_sums = N.sum(axis=0) # axis 0 and shape 0 = row. Sum on axis 0 is equal to sum of elements of the columns
     O = np.array([[N[r, c] * v[c] / c_sums[c] for c in range(N.shape[1])]
                   for r in range(N.shape[0])])
 
@@ -176,5 +178,5 @@ Tp.sum()
 
 #  output csv (names columns and rows not appearing, to adjust format encoding in excel)
 
-os.chdir('C:/Users/rocpa/OneDrive/Documenti/GitHub/WP5_FOSSR/')
+
 Fpdf.to_csv('percent_fitted.csv',sep = ",")
