@@ -14,7 +14,7 @@ import os
 # upload csv dataframe #####
 
 # to import csv
-wd = 'C:/Users/rocpa/OneDrive/Desktop/ROME_CNR/WP5/IPF_FOSSR5.5-main/IPF_FOSSR5.5-main/'
+wd = ''
 os.chdir(wd)
 df = pd.read_csv("original_dataset2023agegen.csv",
                  header=None, delimiter = ",")
