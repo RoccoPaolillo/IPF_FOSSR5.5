@@ -180,3 +180,6 @@ Tp.sum()
 
 
 Fpdf.to_csv('percent_fitted.csv',sep = ",")
+
+
+# ipf code block adapted from https://datascience.oneoffcoder.com/
