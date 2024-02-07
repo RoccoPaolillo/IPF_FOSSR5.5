@@ -55,7 +55,7 @@ reset-ticks
 end
 
 to update_weights
-  while [TAE != 0] [
+  while [TAE > 0.0001] [
 repeat 1 [
 fitting_rows           ; the algorithm of IPF: until TAE is 0, the weights are calibrated for each iteration. Each iteration includes update by row and update by column
  fitting_columns
