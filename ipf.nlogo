@@ -20,8 +20,6 @@ globals[
 to sample_extraction
   clear-all
 
-  clear-all
-
   set df  csv:from-file "original_dataset2023agegen.csv" ; dataset csv to upload
   set df filter [i -> item 3 i = "Italia" and item 7 i != "Totale" and item 8 i != "TOTAL"  ] df   ; selection data
   set maledf filter [i -> item 7 i = "Maschi" ] df        ; filtering data by gender
