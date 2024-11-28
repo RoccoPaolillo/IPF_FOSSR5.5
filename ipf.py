@@ -178,7 +178,10 @@ def process_ipf(origin="original_dataset2023agegen.csv", destination='percent_fi
   Tp.sum()
 
   # create output folder, if not existing
-  os.makedirs(os.path.dirname(destination), exist_ok=True)
+
+  dir_output = os.path.dirname(destination)
+  if dir_output != '':
+    os.makedirs(dir_output, exist_ok=True)
 
   #  output csv (names columns and rows not appearing, to adjust format encoding in excel)
   Fpdf.to_csv(destination, sep = ",")
