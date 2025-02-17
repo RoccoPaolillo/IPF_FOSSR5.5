@@ -94,16 +94,21 @@ array_f[81:101,:]
 
 # set target marginals
 # TGTunder50  = # array_m[0:51,2].sum() + array_f[0:51,2].sum()
-TGTunder50 = 58515 #  array_m[51:81,2].sum() + array_f[51:81,2].sum()
-TGTover50 = 78481#  array_m[81:101,2].sum() + array_f[81:101,2].sum()
-TGTmale = 51544 #  array_m[0:51,2].sum() + array_m[51:81,2].sum() + array_m[81:101,2].sum()
-TGTfemale = 85452 #  array_f[0:51,2].sum() + array_f[51:81,2].sum() + array_f[81:101,2].sum()
+TGT0_50 = 266633 #  array_m[51:81,2].sum() + array_f[51:81,2].sum()
+TGT50_100 = 227433
+TGTmale = 243308 #  array_m[0:51,2].sum() + array_m[51:81,2].sum() + array_m[81:101,2].sum()
+TGTfemale = 250758 #  array_f[0:51,2].sum() + array_f[51:81,2].sum() + array_f[81:101,2].sum()
 
-T = np.array([
-    [array_m[0:51,2].sum(),array_f[0:51,2].sum()],
-    [array_m[51:81,2].sum(),array_f[51:81,2].sum()],
-    [array_m[81:101,2].sum(),array_f[81:101,2].sum()]
-    ])
+TGThpt = 116071
+TGThptNO = 377995
+
+TGThealht2yes = 29292
+TGThealth2no = 107704
+#T = np.array([
+#    [array_m[0:51,2].sum(),array_f[0:51,2].sum()],
+#    [array_m[51:81,2].sum(),array_f[51:81,2].sum()],
+#    [array_m[81:101,2].sum(),array_f[81:101,2].sum()]
+#    ])
 
 
 ####### algorithm IPF computation
@@ -112,13 +117,16 @@ T = np.array([
 # array: axis 0 row, axis 1 column, numerification starts at 0
 X = np.array([
     [1,1],
+    [1,1],
+    [1,1],
     [1,1]
 ])
 
-u = np.array([TGTunder50, TGTover50]) # row target (age)
+u = np.array([TGT0_50, TGT50_100]) # row target (age)
 v = np.array([TGTmale, TGTfemale]) # col target (gender)
 
-
+u =  np.array([131306., 135327., 112002., 115431.])
+v = np.array([TGThpt,TGThptNO])
 # IPF algorithm
 # run by row first then column
 
@@ -139,10 +147,10 @@ def ipf_update(M, u, v):
 M = X.copy() # to set the dataset to run the IPF algorithm over
 
 # compute algorithm
-for _ in range(10):
+for _ in range(50):
     M, d_u, d_v = ipf_update(M, u, v)
     print(f'd_u = {d_u:.5f}, d_v = {d_v:.5f}')
-    if d_u <= 0.0001 and d_v <= 0.0001:          # algorithm stops if the distance below threshold
+    if d_u <= 0.00001 and d_v <= 0.00001:          # algorithm stops if the distance below threshold
         break
 
 M
