@@ -13,120 +13,90 @@ import os
 
 # upload csv dataframe #####
 
-# to import csv
-wd = ''
-os.chdir(wd)
-df = pd.read_csv("original_dataset2023agegen.csv",
-                 header=None, delimiter = ",")
-array = df.to_numpy()    
-
-# to filter aggregated at national level ("Italia" region)
-filter_arr = []
-
-for element in array[:,3]:
-  # if the element is higher than 42, set the value to True, otherwise False:
-  if element == 'Italia':
-    filter_arr.append(True)
-  else:
-    filter_arr.append(False)
-
-array = array[filter_arr]
-
-# to filter out totals age
-
-filter_arr2 = []
-
-for element in array[:,9]:
-  if element != 'Totale':
-    filter_arr2.append(True)
-  else:
-    filter_arr2.append(False)
-
-array = array[filter_arr2]
-
-# to filter out totals gender
-filter_arr3 = []
-
-for element in array[:,7]:
-
-  if element != 'Totale':
-    filter_arr3.append(True)
-  else:
-    filter_arr3.append(False)
-
-array = array[filter_arr3]
-
-# to filter columns needed based on location (gender, age, observation)
-array = array[:,(7,9,13)]
-array[:,2] = array[:,2].astype(float) # to read observation as number (upload as csv)
-
-# to filter subset of male population
-filter_arrm = []
-
-for element in array[:,0]:
-  # if the element is higher than 42, set the value to True, otherwise False:
-  if element == 'Maschi':
-    filter_arrm.append(True)
-  else:
-    filter_arrm.append(False)
-
-array_m = array[filter_arrm]
-
-array_m[0:51,:]  # marginals males
-array_m[51:81,:]
-array_m[81:101,:]
-
-# to filter subset of female population
-
-filter_arrf = []
-
-for element in array[:,0]:
-  if element == 'Femmine':
-    filter_arrf.append(True)
-  else:
-    filter_arrf.append(False)
-
-array_f = array[filter_arrf]
-
-array_f[0:51,:]   # marginal femals
-array_f[51:81,:]
-array_f[81:101,:]
-
-# set target marginals
-# TGTunder50  = # array_m[0:51,2].sum() + array_f[0:51,2].sum()
-TGT0_50 = 266633 #  array_m[51:81,2].sum() + array_f[51:81,2].sum()
-TGT50_100 = 227433
-TGTmale = 243308 #  array_m[0:51,2].sum() + array_m[51:81,2].sum() + array_m[81:101,2].sum()
-TGTfemale = 250758 #  array_f[0:51,2].sum() + array_f[51:81,2].sum() + array_f[81:101,2].sum()
-
-TGThpt = 116071
-TGThptNO = 377995
-
-TGThealht2yes = 29292
-TGThealth2no = 107704
-#T = np.array([
-#    [array_m[0:51,2].sum(),array_f[0:51,2].sum()],
-#    [array_m[51:81,2].sum(),array_f[51:81,2].sum()],
-#    [array_m[81:101,2].sum(),array_f[81:101,2].sum()]
-#    ])
 
 
-####### algorithm IPF computation
+# 2 classes demography
+TGT0_50 = 3527336 #  array_m[51:81,2].sum() + array_f[51:81,2].sum()
+TGT50_100 = 2805688
+TGTmale = 3073047 #  array_m[0:51,2].sum() + array_m[51:81,2].sum() + array_m[81:101,2].sum()
+TGTfemale = 3259977 #  array_f[0:51,2].sum() + array_f[51:81,2].sum() + array_f[81:101,2].sum()
 
-# artificial population (each cross-category (unknown) cell has weight 1)
-# array: axis 0 row, axis 1 column, numerification starts at 0
+
+u = np.array([TGT0_50, TGT50_100]) # row target (age)
+v = np.array([TGTmale, TGTfemale]) # col target (gender)
+
 X = np.array([
     [1,1],
+    [1,1]
+])
+
+M = X.copy() # to set the dataset to run the IPF algorithm over
+M
+
+Xdem = np.array([
+    [1711610,1815726],
+    [1361437,1444251]
+])
+
+M = Xdem.copy() # to set the dataset to run the IPF algorithm over
+M
+
+TGT0_50HPT = 66998
+TGT50_100HPT = 1126447
+TGTmaleHPT = 573530
+TGTfemHPT = 619915
+
+TGT0_50HF = 2597
+TGT50_100HF = 91329
+TGTmaleHF = 48272
+TGTfemHF = 45654
+
+
+u =  np.array([TGT0_50HF,TGT50_100HF]) # row hpt <=30, hpt 30-60, hpt > 60
+v = np.array([TGTmaleHPT,TGTfemHPT]) # man wiyh hpt, fem with hpt
+
+# 3 categories demography ###
+TGT0_30 =  1745215 #  array_m[51:81,2].sum() + array_f[51:81,2].sum()
+TGT30_60 = 2832088
+TGT60_100 = 1755721
+TGTmale = 3073047 #  array_m[0:51,2].sum() + array_m[51:81,2].sum() + array_m[81:101,2].sum()
+TGTfemale = 3259977 #  array_f[0:51,2].sum() + array_f[51:81,2].sum() + array_f[81:101,2].sum()
+
+
+u = np.array([TGT0_30, TGT30_60,TGT60_100]) # row target (age)
+v = np.array([TGTmale, TGTfemale]) # col target (gender)
+
+X = np.array([
     [1,1],
     [1,1],
     [1,1]
 ])
 
-u = np.array([TGT0_50, TGT50_100]) # row target (age)
-v = np.array([TGTmale, TGTfemale]) # col target (gender)
+M = X.copy() # to set the dataset to run the IPF algorithm over
+M
 
-u =  np.array([131306., 135327., 112002., 115431.])
-v = np.array([TGThpt,TGThptNO])
+Xdem = np.array([
+    [1,1],
+    [1,1],
+    [1,1]
+])
+
+M = Xdem.copy() # to set the dataset to run the IPF algorithm over
+M
+
+TGT0_30M = 907152
+TGT30_60M = 1393659
+TGT60_100M = 772236
+TGTmaleHPT = 573530
+TGTmaleNOHPT = 2499517
+
+u =  np.array([TGT0_30M,TGT30_60M,TGT60_100M]) # row hpt <=30, hpt 30-60, hpt > 60
+v = np.array([TGTmaleHPT,TGTmaleNOHPT]) # man wiyh hpt, fem with hpt
+
+
+
+
+
 # IPF algorithm
 # run by row first then column
 
@@ -145,9 +115,13 @@ def ipf_update(M, u, v):
     return O, d_u, d_v
 
 M = X.copy() # to set the dataset to run the IPF algorithm over
+M
+
+M = Xdem.copy() # to set the dataset to run the IPF algorithm over
+M
 
 # compute algorithm
-for _ in range(50):
+for _ in range(200):
     M, d_u, d_v = ipf_update(M, u, v)
     print(f'd_u = {d_u:.5f}, d_v = {d_v:.5f}')
     if d_u <= 0.00001 and d_v <= 0.00001:          # algorithm stops if the distance below threshold
@@ -169,6 +143,7 @@ def percsample(T):
 
 # percentage fitted
 Fp = percsample(M) 
+Fp
 Fp.sum(axis=0) # sum marginal columns
 Fp.sum(axis=1) # sum marginal rows
 Fp.sum()
